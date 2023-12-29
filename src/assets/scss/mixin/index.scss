@@ -1,0 +1,29 @@
+@import "../variable/colors.scss";
+
+@mixin iconbutton(
+  $circle: false,
+  $color: $white,
+  $contentColor: $black,
+  $colorHover: $lightGrey
+) {
+  background-color: $color;
+  border: 0;
+  @if $circle {
+    border-radius: 50%;
+  } @else {
+    border-radius: 5px;
+  }
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $contentColor;
+  &:hover {
+    background-color: $colorHover;
+  }
+}
+@mixin placeItem($content: flex-start, $item: flex-start) {
+  display: flex;
+  justify-content: $content;
+  align-items: $item;
+}

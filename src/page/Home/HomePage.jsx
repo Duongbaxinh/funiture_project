@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import axios from 'axios'
+import './styles.scss'
+import { ReactComponent as SvgIcon } from '../../assets/svg/icon_cart.svg';
 function HomePage(props) {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const emailRef = useRef(null);
@@ -44,7 +46,13 @@ function HomePage(props) {
     }
     return (
         <div>
-            <h1>CHECK AUTHENTICATION</h1>
+            <h1 >check authenticatio</h1>
+            <h2 >check authenticatio</h2>
+            <h3 >check authenticatio</h3>
+            <h4 >check authentication</h4>
+            <button className='icon_button'>
+                <SvgIcon />
+            </button>
             <form >
                 <input type="text" ref={emailRef} placeholder='Email...' />
                 <input type="text" ref={passwordRef} placeholder='Password...' />
