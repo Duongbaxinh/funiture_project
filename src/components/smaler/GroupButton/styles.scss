@@ -1,0 +1,20 @@
+@import "../../../assets/scss/mixin/index.scss";
+@import "../../../assets/scss/variable/colors.scss";
+.group {
+  display: flex;
+  justify-content: start;
+  background-color: $lightGrey;
+  padding: 2px;
+  border-radius: 5px;
+  &_button {
+    @include iconbutton($color: transparent, $colorHover: $white);
+    padding: 5px 40px;
+    @include breakPoint(miniIpad) {
+      padding: 5px 20px;
+    }
+  }
+}
+.isActive {
+  background-color: $white;
+  color: $black;
+}

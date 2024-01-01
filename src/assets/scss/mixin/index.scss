@@ -4,8 +4,10 @@
   $circle: false,
   $color: $white,
   $contentColor: $black,
-  $colorHover: $lightGrey
+  $colorHover: $lightGrey,
+  $hover: false
 ) {
+  cursor: pointer;
   background-color: $color;
   border: 0;
   @if $circle {
@@ -26,4 +28,30 @@
   display: flex;
   justify-content: $content;
   align-items: $item;
+}
+@mixin padding($top: 0, $right: 0, $bottom: 0, $left: 0) {
+  padding: $top $right $bottom $left;
+}
+
+@mixin breakPoint($point) {
+  @if ($point == "phone") {
+    @media (max-width: 430px) {
+      @content;
+    }
+  }
+  @if ($point == "miniIpad") {
+    @media (max-width: 650px) {
+      @content;
+    }
+  }
+  @if ($point == "ipad") {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+  @if ($point == "desktop") {
+    @media (min-width: 1024px) {
+      @content;
+    }
+  }
 }

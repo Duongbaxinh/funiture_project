@@ -1,0 +1,141 @@
+@import "../../assets/scss/mixin/index.scss";
+@import "../../assets/scss/variable/colors.scss";
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @include breakPoint(phone) {
+    padding: 8px;
+  }
+  @include breakPoint(miniIpad) {
+    padding: 10px;
+  }
+  @include breakPoint(ipad) {
+    padding: 20px;
+  }
+  // @include breakPoint()
+  &_icon {
+    font-weight: 700;
+    @include breakPoint(ipad) {
+      display: none;
+    }
+  }
+  &_top {
+    @include placeItem($item: center);
+    gap: 40px;
+    &--left {
+      @include placeItem($item: center);
+      gap: 10px;
+    }
+    &--right {
+      @include breakPoint(phone) {
+        display: none;
+      }
+    }
+    &--icondown {
+      position: relative;
+    }
+    &--address {
+      position: absolute;
+      z-index: 99;
+      background-color: $white;
+      top: 30px;
+      left: 0;
+      width: 250px;
+      border-style: dotted;
+      border-radius: 10px;
+      padding: 8px;
+      & div:not(:first-child) {
+        padding-top: 10px;
+      }
+      & div:hover {
+        color: gray;
+      }
+    }
+  }
+  &_bottom {
+    width: 100%;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &--tab {
+      @include placeItem;
+      gap: 15px;
+      @include breakPoint(miniIpad) {
+        display: none;
+      }
+    }
+    &--icon {
+      @include placeItem;
+      font-weight: 700;
+      gap: 12px;
+      @include breakPoint(ipad) {
+      }
+      & i {
+        @include iconbutton;
+      }
+    }
+    &--iconMenu {
+      position: relative;
+    }
+    &--menu {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+  &_menu {
+    padding: 15px;
+    & li:not(:first-child) {
+      padding-top: 20px;
+    }
+  }
+}
+.icon {
+  @include iconbutton;
+  padding: 10px;
+}
+.drawer {
+  transform: translateX(300px);
+}
+.search {
+  @include placeItem($item: center);
+  margin-top: 15px;
+  width: 100%;
+  height: 30px;
+  border: 0.5px solid $black;
+  border-radius: 5px;
+
+  &_elementLeft {
+    @include placeItem($item: center, $content: center);
+    height: 100%;
+    padding: 0 5px;
+    background-color: $black;
+    color: $white;
+    border-radius: 5px 0 0 5px;
+  }
+  &_input {
+    height: 100%;
+    padding: 0 5px;
+    border: none;
+    flex: 1;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  &_icon {
+    @include placeItem($content: center, $item: center);
+    width: 30px;
+    height: inherit;
+    background-color: black;
+    color: white;
+    border-radius: 0 5px 0 5px;
+  }
+}
