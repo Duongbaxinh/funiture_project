@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ProductCartContext } from './context/ProductCartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ProductCartContext>
+      <App />
+    </ProductCartContext>
   </React.StrictMode>
 );
 

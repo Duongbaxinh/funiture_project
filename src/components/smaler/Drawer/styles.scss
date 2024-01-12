@@ -11,6 +11,16 @@
     opacity: 1;
   }
 }
+@keyframes animationRight {
+  0% {
+    right: -300px;
+    opacity: 0;
+  }
+  100% {
+    right: 0;
+    opacity: 1;
+  }
+}
 .drawer_model {
   width: 100vw;
   height: 100vh;
@@ -21,14 +31,25 @@
   opacity: 0.5;
   z-index: 0;
 }
-.drawer_container {
+.drawer_containerleft {
   width: 300px;
   height: 100vh;
   z-index: 999;
   position: fixed;
-  padding: 0;
+  padding: 20px;
   top: 0;
   left: 0;
   background-color: $white;
   animation: animationLeft 0.2s ease-in;
+}
+.drawer_containerright {
+  width: 300px;
+  height: 100vh;
+  z-index: 999;
+  position: fixed;
+  padding: 20px;
+  top: 0;
+  right: 0;
+  background-color: $white;
+  animation: animationRight 0.2s ease-in;
 }

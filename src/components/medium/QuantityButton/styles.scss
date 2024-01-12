@@ -1,0 +1,19 @@
+@import "../../../assets/scss/mixin/index.scss";
+@import "../../../assets/scss/variable/colors.scss";
+.btn-quantity {
+  @include placeItem($content: space-between, $item: center);
+  width: 80%;
+  height: fit-content;
+  padding: 8px 5px;
+  border-radius: 5px;
+  background-color: $lightGrey;
+  & > i {
+    place-items: center;
+    cursor: pointer;
+  }
+}
+.btn-container {
+  height: 100%;
+  width: 100%;
+  @include placeItem($content: center, $item: center);
+}

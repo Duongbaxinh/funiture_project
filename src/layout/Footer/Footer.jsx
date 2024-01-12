@@ -65,13 +65,13 @@ function Footer(props) {
             <div className="footer_bottom">
                 <ul className='footer_bottom--left'>
                     {tabPolicy.map(({ nameTab, endPoint }, index) =>
-                        <li><Link to={endPoint} style={{ color: 'white' }}>
+                        <li key={nameTab}><Link to={endPoint} style={{ color: 'white' }}>
                             {nameTab}
                         </Link></li>
                     )}
                 </ul>
                 <div className="footer_bottom--right">
-                    {icons.map((icon, index) => <i key={index} className='icon'>{icon}</i>)}
+                    {icons.map((icon, index) => <i key={index} className='footer_bottom--icon'>{icon}</i>)}
                 </div>
             </div>
         </div>

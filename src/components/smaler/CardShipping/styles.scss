@@ -1,0 +1,17 @@
+@import "../../../assets/scss/mixin/index.scss";
+@import "../../../assets/scss/variable/colors.scss";
+
+.shipping {
+  width: 100%;
+  @include placeItem($content: space-between, $item: center);
+  min-width: 300px;
+  border: 1px solid $black;
+  border-radius: 6px;
+  & > * {
+    padding: 8px;
+  }
+  &_leading {
+    @include placeItem($item: center);
+    gap: 8px;
+  }
+}

@@ -2,17 +2,14 @@
 @import "../../assets/scss/variable/colors.scss";
 .footer {
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
   background-color: $black;
-  padding: 30px;
+  padding: 15px 30px;
   color: $white;
   @include breakPoint(miniIpad) {
-    padding: 30px 10px;
+    padding: 10px;
   }
   &_top {
-    @include placeItem($content: space-between, $item: center);
+    @include placeItem($content: space-between, $item: flex-start);
     padding-bottom: 30px;
     &--tab {
       @include placeItem;
@@ -33,7 +30,7 @@
     }
   }
   &_bottom {
-    margin-top: 20px;
+    margin-top: 10px;
     color: $white;
     @include placeItem($content: space-between, $item: center);
     &--left {

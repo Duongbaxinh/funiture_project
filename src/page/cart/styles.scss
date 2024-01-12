@@ -1,0 +1,230 @@
+@import "../../assets/scss/mixin/index.scss";
+@import "../../assets/scss/variable/colors.scss";
+
+.cart {
+  margin-top: 100px;
+  margin-bottom: 130px;
+  padding: 0 30px;
+  & > * {
+    padding-top: 15px;
+  }
+  &_checkout {
+    @include placeItem;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  &_checkoutProduct {
+    width: 60%;
+    @include breakPoint(miniIpad) {
+      width: 100%;
+    }
+  }
+  &_checkoutPrice {
+    width: fit-content;
+    border: 1px solid $black;
+    border-radius: 8px;
+    padding: 20px;
+    @include placeItem;
+    flex-direction: column;
+    gap: 10px;
+    @include breakPoint(miniIpad) {
+      width: 100%;
+    }
+    &--total {
+      width: 100%;
+      padding-top: 15px;
+      @include placeItem($content: space-between, $item: center);
+    }
+    &--btn {
+      margin-top: 20px;
+      @include buttonCustome;
+    }
+  }
+  &_coupon {
+    width: 40%;
+    padding-top: 20px;
+    & > h1 {
+      font-weight: 700;
+    }
+    & > * {
+      padding-top: 10px;
+    }
+    &--code {
+      margin-top: 10px;
+      border: 1px solid black;
+      padding: 10px 15px;
+      @include placeItem($content: space-between, $item: center);
+    }
+  }
+}
+.group-step {
+  width: 100%;
+  background-color: $white;
+  @include placeItem;
+  gap: 30px;
+  @include breakPoint(miniIpad) {
+    flex-wrap: wrap;
+  }
+}
+.shoppingCart {
+  display: grid;
+  row-gap: 20px;
+  grid-template-columns: 40% 20% 20% 20%;
+  grid-auto-rows: auto;
+  &_title:not(:first-child) {
+    text-align: center;
+  }
+  & > p {
+    font-weight: 700;
+  }
+  &_product {
+    @include placeItem($item: center);
+    gap: 15px;
+  }
+}
+.contact {
+  width: 100%;
+  @include placeItem;
+  gap: 20px;
+  flex-direction: column;
+  & h1 {
+    font-weight: bold;
+  }
+  &_info {
+    width: 100%;
+    padding: 15px 0;
+    display: grid;
+    grid-template-areas:
+      "input1 input2"
+      "input3 input3"
+      "input4 input4"
+      "input5 input5";
+    column-gap: 15px;
+    row-gap: 15px;
+    &--input {
+      @include placeItem;
+      gap: 8px;
+      flex-direction: column;
+      & h3 {
+        font-weight: bold;
+        color: $darkGrey;
+      }
+      & input {
+        padding: 8px 10px;
+        width: 100%;
+        &:focus {
+          outline-color: $darkGrey;
+        }
+      }
+    }
+  }
+  &_address {
+    width: 100%;
+    padding: 15px 0;
+    display: grid;
+    grid-template-areas:
+      "input1 input1"
+      "input2 input2"
+      "input3 input3"
+      "input4 input5";
+    column-gap: 15px;
+    row-gap: 15px;
+    &--input {
+      @include placeItem;
+      gap: 8px;
+      flex-direction: column;
+      & h3 {
+        font-weight: bold;
+        color: $darkGrey;
+      }
+      & input {
+        padding: 8px 10px;
+        width: 100%;
+        &:focus {
+          outline-color: $darkGrey;
+        }
+      }
+    }
+  }
+  &_paymethod {
+    width: 100%;
+    @include placeItem;
+    flex-direction: column;
+    gap: 20px;
+
+    &--form {
+      width: 100%;
+      padding: 15px 0;
+      display: grid;
+      grid-template-areas:
+        "input1 input1"
+        "input2 input3";
+      column-gap: 15px;
+      row-gap: 15px;
+    }
+    &--input {
+      @include placeItem;
+      gap: 8px;
+      flex-direction: column;
+      & h3 {
+        font-weight: bold;
+        color: $darkGrey;
+      }
+      & input {
+        padding: 8px 10px;
+        width: 100%;
+        &:focus {
+          outline-color: $darkGrey;
+        }
+      }
+    }
+    &--btn {
+      @include buttonCustome;
+    }
+  }
+}
+.input1 {
+  grid-area: input1;
+  width: 100%;
+}
+.input2 {
+  grid-area: input2;
+}
+.input3 {
+  grid-area: input3;
+}
+.input4 {
+  grid-area: input4;
+}
+.input5 {
+  grid-area: input5;
+}
+
+// COMPLEMENT
+.complement {
+  & > h1 {
+    margin: 10px 0;
+  }
+  & > h1:nth-of-type(2) {
+    font-weight: bold;
+    font-size: xx-large;
+  }
+  &_info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 40%;
+    @include breakPoint(miniIpad) {
+      width: 100%;
+    }
+    & > div {
+      @include placeItem($content: space-between);
+    }
+    &--item p {
+      font-weight: bold;
+      &:nth-of-type(1) {
+        color: $darkGrey;
+      }
+    }
+  }
+}

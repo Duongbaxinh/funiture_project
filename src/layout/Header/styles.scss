@@ -5,10 +5,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 20px 60px;
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  background-color: $white;
   @include breakPoint(phone) {
     padding: 8px;
   }

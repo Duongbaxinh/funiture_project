@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IoHomeSharp } from "react-icons/io5";
 import { TbCategoryFilled } from "react-icons/tb";
 import { CiShop } from "react-icons/ci";
@@ -17,6 +17,8 @@ import { Link } from 'react-router-dom';
 import TabPage from './TabPage';
 import DrawerContrainer from '../../components/smaler/Drawer/DrawerContrainer';
 import Search from './Search';
+import CardSamall from '../../page/Cart/CardSmall/CardSamall';
+import { CartContextState } from '../../context/ProductCartContext';
 Header.propTypes = {
 
 };
@@ -55,13 +57,19 @@ const address = [
     'DaNang,Nguyen Van Linh,09',
     'DaNang,To Huu,18',
 ]
-const icons = [<SvgIconSearch />, <SvgIconUser />, <SvgIconCart />]
+
 function Header(props) {
-    const [width, setWidth] = useState(window.innerWidth)
+    const headerRef = useRef(null)
+    const { dataProduct, handleQuantity, handleRemoveProduct } = CartContextState()
+    const [screen, setScreen] = useState({
+        width: window.innerWidth,
+        height: window.scrollY
+    })
     const [citySelected, setCitySelected] = useState(address[0])
     const [showAddress, setShowAddress] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [isSelected, setIsSelected] = useState(0)
+    const [showCart, setShowCart] = useState(false)
     const handleSelected = (value) => {
         setIsSelected(value)
     }
@@ -72,24 +80,43 @@ function Header(props) {
         setCitySelected(address[value])
     }
     const handleShowMenu = () => {
-        if (width < 650) {
+        if (screen.width < 650) {
             setShowMenu(!showMenu)
         }
+    }
+    const handleShowCart = () => {
+        console.log('check run show cart', showCart)
+        setShowCart(!showCart)
     }
     useEffect(() => {
         try {
             const updateWidth = () => {
-                setWidth(window.innerWidth)
+                setScreen({ ...screen, width: window.innerWidth })
             }
-            // width < 650 ? setShowMenu(true) : setShowMenu(false)
             window.addEventListener('resize', updateWidth)
+            // window.addEventListener('scroll',)
             return () => window.removeEventListener('resize', updateWidth)
         } catch (error) {
 
         }
-    }, [width])
+    }, [screen])
+    const icons = [
+        {
+            handle: handleShowCart,
+            icon: <SvgIconSearch />
+        },
+        {
+            handle: handleShowCart,
+            icon: <SvgIconUser />
+        },
+        {
+            handle: handleShowCart,
+            icon: <SvgIconCart />
+        },
+
+    ]
     return (
-        <div className='header'>
+        <div ref={headerRef} className='header'>
             <div className='header_top'>
                 <div className='header_top--left'>
                     <SvgIconShop />
@@ -120,7 +147,7 @@ function Header(props) {
                 </div>
             </div>
             <div className='header_bottom'>
-                {width < 650 ?
+                {screen.width < 650 ?
                     // ICON MENU
                     <div header_bottom--iconMenu>
                         <i className='icon'
@@ -129,7 +156,7 @@ function Header(props) {
                         {/* DRAWER */}
                         {showMenu &&
                             <div>
-                                <DrawerContrainer onShowMenu={handleShowMenu} >
+                                <DrawerContrainer onShowMenu={handleShowMenu} position={'left'} >
                                     <ul className='header_menu'>
                                         <li>
                                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -156,13 +183,24 @@ function Header(props) {
                     <h1 className='header_bottom--icon'>Iconic</h1>}
                 <TabPage />
                 <div className='header_bottom--icon'>
-                    {icons.map((icon, index) =>
-                        <i>{icon}</i>
+                    {icons.map(({ handle, icon }, index) =>
+                        <i key={index} onClick={handle}>{icon}</i>
                     )}
                 </div>
+                {
+                    showCart &&
+                    <div style={{ margin: '20px' }}>
+                        <DrawerContrainer position={'right'} onShowMenu={handleShowCart}>
+                            <CardSamall
+                                products={dataProduct}
+                                onHandleQuatity={handleQuantity}
+                                onRemoveProduct={handleRemoveProduct} />
+                        </DrawerContrainer>
+                    </div>
 
+                }
             </div>
-            <Search />
+            {/* <Search /> */}
         </div>
     );
 }
