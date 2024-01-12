@@ -5,7 +5,7 @@ import Register from '../layout/Register/Register';
 import Login from '../layout/Login/Login';
 import Category from '../page/Category/Category';
 import Product from '../page/Product/Product';
-import Cart from '../page/Cart/Cart';
+import Cart from '../page/cart/Cart';
 import Home from '../page/Home/Home';
 import Blog from '../page/Blog/Blog';
 import Catelogue from '../page/Catelogue/Catelogue';
