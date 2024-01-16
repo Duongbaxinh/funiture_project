@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import TabPage from './TabPage';
 import DrawerContrainer from '../../components/smaler/Drawer/DrawerContrainer';
 import Search from './Search';
-import CardSamall from '../../page/Cart/CardSmall/CardSamall';
+import CardSmall from '../../page/cart/CardSmall/CardSmall';
 import { CartContextState } from '../../context/ProductCartContext';
 Header.propTypes = {
 
@@ -191,7 +191,7 @@ function Header(props) {
                     showCart &&
                     <div style={{ margin: '20px' }}>
                         <DrawerContrainer position={'right'} onShowMenu={handleShowCart}>
-                            <CardSamall
+                            <CardSmall
                                 products={dataProduct}
                                 onHandleQuatity={handleQuantity}
                                 onRemoveProduct={handleRemoveProduct} />
