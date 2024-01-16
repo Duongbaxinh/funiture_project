@@ -1,0 +1,23 @@
+@import "../../../assets/scss/mixin/index.scss";
+@import "../../../assets/scss/variable/colors.scss";
+.cartReview {
+  @include placeItem;
+  gap: 30px;
+  &_avatar img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+  }
+  &_info {
+    @include placeItem;
+    flex-direction: column;
+    gap: 20px;
+    & h2 {
+      font-weight: 700;
+    }
+    &-time {
+      @include placeItem;
+      gap: 20px;
+    }
+  }
+}

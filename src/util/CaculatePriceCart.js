@@ -1,6 +1,6 @@
 const caculatePriceCart = (products) => {
     return products.reduce((arr, product) => {
-        return arr += (product.product_price * product.product_quanity)
+        return arr += (product.product_price * product.quantity)
     }, 0)
 }
 

@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
-import { ReactComponent as SvgIconArrowRS } from '../../assets/svg/icon_arrowRS.svg';
 import { ReactComponent as SvgIconPercent } from '../../assets/svg/ticket-percent.svg';
-import './styles.scss'
+import CardShipping from '../../components/smaler/CardShipping/CardShipping';
+import LinkHeader from '../../components/smaler/LinkHeader/LinkHeader';
+import { CartContextState } from '../../context/ProductCartContext';
+import { caculatePriceCart } from '../../util/CaculatePriceCart';
+import Commplement from './Commplement';
+import ContactInformation from './ContactInformation';
 import GroupStepCard from './GroupStepCard';
 import ShoppingCart from './ShoppingCart';
-import CardShipping from '../../components/smaler/CardShipping/CardShipping';
-import { caculatePriceCart } from '../../util/CaculatePriceCart';
-import ContactInformation from './ContactInformation';
-import { CartContextState } from '../../context/ProductCartContext';
-import Commplement from './Commplement';
+import './styles.scss';
 
 const shippings = [
     {
@@ -55,11 +54,10 @@ function Cart(props) {
     const handleUpStep = () => {
         setCurrenStep(currentStep + 1)
     }
+    if (!dataProduct) return <h1>Loading...</h1>
     return (
         <div className='cart'>
-            <div className='cart_linkpage'>
-                <Link>Home</Link> <span> <i><SvgIconArrowRS /></i>Cart</span>
-            </div>
+            <LinkHeader titlePage={'Cart'} />
             <h1 style={{ fontWeight: 'bold' }}>SHOPPING CART</h1>
             <GroupStepCard steps={steps} currentStep={currentStep} />
             <> {

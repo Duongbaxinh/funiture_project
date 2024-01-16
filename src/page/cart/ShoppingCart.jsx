@@ -14,11 +14,11 @@ function ShoppingCart({ products, onHandleQuatity, onRemoveProduct }) {
             <hr style={{ margin: '10px 0px' }} />
             {/* PRODUCT */}
             {products.map(({
-                product_id,
+                productId,
                 product_name,
                 product_des,
-                product_thumbnai,
-                product_quanity,
+                product_thumbnail,
+                quantity,
                 product_price
             }, index) =>
             (
@@ -26,24 +26,24 @@ function ShoppingCart({ products, onHandleQuatity, onRemoveProduct }) {
                     <div className='shoppingCart'>
                         <div className='shoppingCart_product'>
                             <div className="shoppingCart_product--image">
-                                <img src={product_thumbnai} alt={product_name} />
+                                <img src={product_thumbnail} alt={product_name} />
                             </div>
                             <div className='shoppingCart_product--detail'>
                                 <h2 style={{ fontWeight: 'bold' }}>{product_name}</h2>
                                 <p>Color:{product_des}</p>
                                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                                     <SvgIconCancel
-                                        onClick={() => onRemoveProduct(product_id)} />
+                                        onClick={() => onRemoveProduct(productId)} />
                                     Remove
                                 </div>
                             </div>
                         </div>
-                        <QuantityButton product_quanity={product_quanity}
-                            onUp={() => { onHandleQuatity(product_id, "up") }}
-                            onDown={() => { onHandleQuatity(product_id, "down") }}
+                        <QuantityButton quantity={quantity}
+                            onUp={() => { onHandleQuatity(productId, "up") }}
+                            onDown={() => { onHandleQuatity(productId, "down") }}
                         />
-                        <p className='btn-container'>{product_price}$</p>
-                        <p className='btn-container'>{product_price * product_quanity} $</p>
+                        <p className='btn-container'>{Number(product_price)}$</p>
+                        <p className='btn-container'>{Number(product_price) * Number(quantity)} $</p>
                     </div>
                     <hr style={{ margin: '5px 0px' }} />
                 </div>

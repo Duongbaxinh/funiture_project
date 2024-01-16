@@ -5,7 +5,7 @@ function StepCart({ icon, label, isActive }) {
         <div className='stepCard' style={{ borderBottom: `${isActive ? ' 3px solid black' : ''}` }}>
             <p className={`stepCard_icon ${isActive ? 'active' : ''}`}>{icon}</p>
             <p className='stepCard_text'>{label}</p>
-            {isActive && <hr style={{ color: 'black' }} />}
+
         </div>
     );
 }

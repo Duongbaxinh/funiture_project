@@ -36,6 +36,7 @@
 @mixin buttonCustome(
   $width: 100%,
   $padding: 10px,
+  $border: 0px,
   $bg: $black,
   $color: $white
 ) {
@@ -43,6 +44,7 @@
   @include iconbutton;
   padding: $padding;
   background-color: $bg;
+  border: $border;
   color: $color;
 }
 @mixin breakPoint($point) {

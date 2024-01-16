@@ -1,0 +1,112 @@
+@import "../../assets/scss/mixin/index.scss";
+@import "../../assets/scss/variable/colors.scss";
+.product {
+  margin-top: 100px;
+  padding: 0 64px;
+  @include placeItem;
+  flex-direction: column;
+  gap: 40px;
+  &_detail {
+    @include placeItem();
+    gap: 45px;
+    &-image {
+      width: 50%;
+      @include placeItem();
+      flex-direction: column;
+      gap: 15px;
+    }
+    &-mainImage {
+      position: relative;
+      aspect-ratio: 728/817;
+      &--btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        @include placeItem;
+        flex-direction: column;
+        gap: 10px;
+        & button:nth-of-type(1) {
+          @include buttonCustome($width: 60px, $bg: $white, $color: $black);
+        }
+        & button:nth-of-type(2) {
+          @include buttonCustome($width: 60px, $bg: $green);
+        }
+      }
+    }
+    &-listImage {
+      width: 100%;
+    }
+    // style info
+    &-info {
+      @include placeItem;
+      width: 30%;
+      @include breakPoint(miniIpad) {
+        width: 100%;
+      }
+      flex-direction: column;
+      gap: 24px;
+      & h1 {
+        font-size: xx-large;
+        font-weight: 700;
+      }
+      & p {
+        font-size: small;
+        color: $darkGrey;
+      }
+      &--choose {
+        @include placeItem;
+        gap: 10px;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+      &--action {
+        width: 100%;
+        @include placeItem;
+        flex-direction: column;
+        gap: 16px;
+      }
+      &--quantity {
+        width: 100%;
+        @include placeItem;
+        gap: 16px;
+        & button {
+          width: 100%;
+          padding: 7px !important;
+          @include buttonCustome(
+            $bg: $white,
+            $color: $black,
+            $border: 1.5px solid black
+          );
+        }
+      }
+      &--add {
+        @include buttonCustome;
+      }
+      &--category {
+        @include placeItem;
+        gap: 58px;
+      }
+    }
+  }
+  &_review {
+    @include placeItem;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    & h1 {
+      padding: 15px 0;
+    }
+    &-star {
+      @include placeItem;
+      gap: 20px;
+    }
+    &-input {
+      width: 100%;
+      & input {
+        width: 100%;
+        padding: 8px 10px;
+      }
+      background-color: red;
+    }
+  }
+}

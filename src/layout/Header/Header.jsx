@@ -1,24 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { IoHomeSharp } from "react-icons/io5";
-import { TbCategoryFilled } from "react-icons/tb";
 import { CiShop } from "react-icons/ci";
-import { MdProductionQuantityLimits } from "react-icons/md";
-import { MdEmail } from "react-icons/md";
-import { ReactComponent as SvgIconShop } from '../../assets/svg/icon_store.svg'
-import { ReactComponent as SvgIconCancel } from '../../assets/svg/icon_cancel.svg'
-import { ReactComponent as SvgIconArrowDown } from '../../assets/svg/icon_arrowDown.svg'
-import { ReactComponent as SvgIconSearch } from '../../assets/svg/icon_search.svg'
-import { ReactComponent as SvgIconUser } from '../../assets/svg/icon_user.svg'
-import { ReactComponent as SvgIconCart } from '../../assets/svg/icon_cart.svg'
-import { ReactComponent as SvgIconMenu } from '../../assets/svg/icon_menu.svg'
-import GroupButton from '../../components/smaler/GroupButton/GroupButton';
-import './styles.scss'
+import { IoHomeSharp } from "react-icons/io5";
+import { MdEmail, MdProductionQuantityLimits } from "react-icons/md";
+import { TbCategoryFilled } from "react-icons/tb";
 import { Link } from 'react-router-dom';
-import TabPage from './TabPage';
+import { ReactComponent as SvgIconArrowDown } from '../../assets/svg/icon_arrowDown.svg';
+import { ReactComponent as SvgIconCancel } from '../../assets/svg/icon_cancel.svg';
+import { ReactComponent as SvgIconCart } from '../../assets/svg/icon_cart.svg';
+import { ReactComponent as SvgIconMenu } from '../../assets/svg/icon_menu.svg';
+import { ReactComponent as SvgIconSearch } from '../../assets/svg/icon_search.svg';
+import { ReactComponent as SvgIconShop } from '../../assets/svg/icon_store.svg';
+import { ReactComponent as SvgIconUser } from '../../assets/svg/icon_user.svg';
 import DrawerContrainer from '../../components/smaler/Drawer/DrawerContrainer';
-import Search from './Search';
-import CardSamall from '../../page/Cart/CardSmall/CardSamall';
+import GroupButton from '../../components/smaler/GroupButton/GroupButton';
 import { CartContextState } from '../../context/ProductCartContext';
+import CardSamall from '../../page/Cart/CardSmall/CardSamall';
+import TabPage from './TabPage';
+import './styles.scss';
 Header.propTypes = {
 
 };

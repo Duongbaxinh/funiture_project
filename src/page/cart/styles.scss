@@ -80,6 +80,10 @@
   &_product {
     @include placeItem($item: center);
     gap: 15px;
+    &--image img {
+      width: 80px;
+      height: 96px;
+    }
   }
 }
 .contact {
