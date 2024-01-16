@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactComponent as SvgIconCancel } from '../../../assets/svg/icon_cancel.svg';
 import QuantityButton from '../../../components/medium/QuantityButton/QuantityButton';
-function CardSamall({ products, onRemoveProduct, onHandleQuatity }) {
+function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
     return (
         <>
             {/* PRODUCT */}
@@ -52,4 +52,4 @@ function CardSamall({ products, onRemoveProduct, onHandleQuatity }) {
     );
 }
 
-export default CardSamall;
+export default CardSmall;
