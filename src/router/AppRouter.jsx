@@ -5,8 +5,9 @@ import Register from '../layout/Register/Register';
 import Login from '../layout/Login/Login';
 import Category from '../page/Category/Category';
 import Product from '../page/Product/Product';
-import Cart from '../page/Cart/Cart';
+import Cart from '../page/cart/Cart';
 import Home from '../page/Home/Home';
+import Blog from '../page/Blog/Blog';
 function AppRouter(props) {
     return (
         <Router>
@@ -18,6 +19,8 @@ function AppRouter(props) {
                     <Route path='/product/:productId' element={<Product />} />
                     <Route path='/cart' element={<Cart />} />
                     <Route path='/home' element={<Home />} />
+                    <Route path='/blog' element={<Blog />} />
+                    
                 </Route>
             </Routes>
         </Router>
