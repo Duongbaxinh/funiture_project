@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import TabPage from './TabPage';
 import DrawerContrainer from '../../components/smaler/Drawer/DrawerContrainer';
 import Search from './Search';
-import CardSamall from '../../page/Cart/CardSmall/CardSamall';
+import CardSamall from '../../page/cart/CardSmall/CardSamall';
 import { CartContextState } from '../../context/ProductCartContext';
 Header.propTypes = {
 
