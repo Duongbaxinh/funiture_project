@@ -14,7 +14,7 @@ import { ReactComponent as SvgIconUser } from '../../assets/svg/icon_user.svg';
 import DrawerContrainer from '../../components/smaler/Drawer/DrawerContrainer';
 import GroupButton from '../../components/smaler/GroupButton/GroupButton';
 import { CartContextState } from '../../context/ProductCartContext';
-import CardSamall from '../../page/Cart/CardSmall/CardSamall';
+import CardSmall from '../../page/Cart/CardSmall/CardSmall';
 import TabPage from './TabPage';
 import './styles.scss';
 Header.propTypes = {
@@ -189,7 +189,7 @@ function Header(props) {
                     showCart &&
                     <div style={{ margin: '20px' }}>
                         <DrawerContrainer position={'right'} onShowMenu={handleShowCart}>
-                            <CardSamall
+                            <CardSmall
                                 products={dataProduct}
                                 onHandleQuatity={handleQuantity}
                                 onRemoveProduct={handleRemoveProduct} />

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom'
 import './styles.scss'
 import { ReactComponent as SvgIconArrowRS } from '../../assets/svg/icon_arrowRS.svg';
 import { ReactComponent as SvgIconStar } from '../../assets/svg/icon_startA.svg';
@@ -12,6 +13,7 @@ import "swiper/css/scrollbar";
 import QuantityButton from '../../components/medium/QuantityButton/QuantityButton';
 import { rate } from '../../util/CaculateReview';
 import CardReview from '../../components/smaler/CardReview/CardReview';
+import axios from 'axios';
 const product = {
     id: '1',
     product_name: 'ZENSO LOUNGE',
@@ -81,10 +83,31 @@ const reviews = [
         createAt: Date.now()
     }
 ]
-function Product(props) {
-    const handleUp = () => { }
-    const handleDown = () => { }
 
+function Product(props) {
+    const [dataProduct, setDataProduct] = useState(null)
+    const { productId } = useParams()
+    const [imageShow, setImageShow] = useState(null)
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data } = await axios.get(`http://localhost:8080/api/v1/product/detail/${productId}`)
+            console.log('check detail product', data.metadata)
+            data.metadata['quantity'] = 1;
+            setImageShow(data.metadata.product_thumbnail)
+            setDataProduct(data.metadata)
+        }
+        fetchData()
+
+    }, [productId])
+    const handleUp = () => {
+        setDataProduct(() => ({ ...dataProduct, quantity: dataProduct.quantity + 1 }))
+    }
+    const handleDown = () => {
+        if (dataProduct.quantity > 1) {
+            setDataProduct(() => ({ ...dataProduct, quantity: dataProduct.quantity - 1 }))
+        }
+    }
+    if (!dataProduct) return <h1>Loading...</h1>
     return (
         <div className='product'>
             <div style={{ paddingBottom: '10px' }}>
@@ -94,7 +117,7 @@ function Product(props) {
                 {/* IMAGE PRODUCT */}
                 <div className="product_detail-image" >
                     <div className="product_detail-mainImage">
-                        <img src={product.product_thumbnail} alt='' />
+                        <img src={imageShow} alt='' />
                         <div className="product_detail-mainImage--btn">
                             <button >NEW</button>
                             <button >50%</button>
@@ -110,9 +133,13 @@ function Product(props) {
                                 prevEl: `.btn-prev}`,
                                 nextEl: `.btn-next}`,
                             }}>
-                            {product.images.map((img) => (
+                            {dataProduct.images.map((img) => (
                                 <SwiperSlide >
-                                    <div className='itemImage' style={{ aspectRatio: 217 / 217 }}>
+                                    <div className='itemImage'
+                                        onClick={() => setImageShow(img)}
+                                        style={{ aspectRatio: 217 / 217 }}
+
+                                    >
                                         <img src={img} alt="" style={{ width: '100%', height: '100%' }} />
                                     </div>
                                 </SwiperSlide>
@@ -123,21 +150,22 @@ function Product(props) {
                 </div>
                 {/* DESCRIPTION PRODUCT */}
                 <div className="product_detail-info">
-                    <h1>{product.product_name}</h1>
-                    <p>{product.product_des}</p>
-                    <h2>${product.product_price}</h2>
+                    <h1>{dataProduct.product_name}</h1>
+                    <p>{dataProduct.product_des}</p>
+                    <h2>${dataProduct.product_price}</h2>
                     <hr style={{ width: '100%' }} />
                     <div>
                         <h3 style={{ fontWeight: '700' }}>Measurement</h3>
-                        <p>{product.product_measure}</p>
+                        <p>{dataProduct.product_measure}</p>
                     </div>
                     <div style={{ display: 'flex', placeContent: 'center', placeItems: 'center' }}>
                         <p>Choose color </p>
                         <i><SvgIconArrowRS /></i>
                     </div>
                     <div className="product_detail-info--choose">
-                        {product.images.map((img, index) => (
-                            <div style={{ width: '72px', height: '72px' }}>
+                        {dataProduct.images.map((img, index) => (
+                            <div style={{ width: '72px', height: '72px' }}
+                                onClick={() => setImageShow(img)}>
                                 <img src={img} alt='' />
                             </div>
                         ))}
@@ -146,7 +174,7 @@ function Product(props) {
                         <div className='product_detail-info--quantity' >
                             <div style={{ width: '150px' }}>
                                 <QuantityButton onDown={handleDown}
-                                    quantity={1}
+                                    quantity={dataProduct.quantity}
                                     onUp={handleUp} />
                             </div>
                             <button>

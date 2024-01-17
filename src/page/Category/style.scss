@@ -12,6 +12,9 @@
   gap: 15px;
   padding-right: 80px;
 }
+.content {
+  border: 0.5px solid green;
+}
 .item0 {
   grid-area: item0;
 }
@@ -31,6 +34,9 @@
   grid-area: item5;
 }
 .item6 {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
   grid-area: item6;
 }
 .item7 {

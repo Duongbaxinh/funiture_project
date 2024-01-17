@@ -15,7 +15,7 @@ function AppRouter(props) {
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/category' element={<Category />} />
-                    <Route path='/product' element={<Product />} />
+                    <Route path='/product/:productId' element={<Product />} />
                     <Route path='/cart' element={<Cart />} />
                     <Route path='/home' element={<Home />} />
                 </Route>

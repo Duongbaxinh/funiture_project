@@ -17,6 +17,7 @@
     }
     &-mainImage {
       position: relative;
+      min-height: 400px;
       aspect-ratio: 728/817;
       &--btn {
         position: absolute;

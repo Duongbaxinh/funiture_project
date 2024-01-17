@@ -1,34 +1,9 @@
 import React, { useContext, createContext, useState, useEffect } from 'react';
 import axios from 'axios'
 const CartContext = createContext();
-const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRkMDlmNmUwLWQwZGEtNDZjZC05OWM5LWE5OWM5MDIxZTY2NCIsImVtYWlsIjoieGluaEBnbWFpbC5jb20iLCJpYXQiOjE3MDUyMDQyOTUsImV4cCI6MTcwNTM3NzA5NX0.KLwwI5NFL0BiyLHbeiANJf-PJTDYxmcFQd3WQbzceXI'
+const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzYjlkODVkLWZhZGUtNDFmZC05N2NkLWE5YTU0ZGJiMzhlZCIsImVtYWlsIjoieGluaEBnbWFpbC5jb20iLCJpYXQiOjE3MDU0MTM3ODIsImV4cCI6MTcwNTU4NjU4Mn0.eogeJl35nT7hdAGWJotvx8we8Gyuxhr4pSLEb5DAYIM'
 export const ProductCartContext = ({ children }) => {
-    // const products = [
-    //     {
-    //         productId: 1,
-    //         product_name: '1.3 Chair',
-    //         product_des: 'Brown',
-    //         quantity: 1,
-    //         product_price: 90000,
-    //         product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704167372/Furniture_web/Paste_image_ddv9ls.png'
-    //     },
-    //     {
-    //         productId: 2,
-    //         product_name: '1.3 Chair',
-    //         product_des: 'Grey',
-    //         quantity: 2,
-    //         product_price: 90000,
-    //         product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    //     },
-    //     {
-    //         productId: 3,
-    //         product_name: '1.3 Chair',
-    //         product_des: 'Brown',
-    //         quantity: 3,
-    //         product_price: 90000,
-    //         product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169741/Furniture_web/Paste_image_zmrrc2.png'
-    //     },
-    // ]
+
     const [dataProduct, setDataProduct] = useState(null)
     const handleQuantity = (productId, type) => {
         let newDataProduct;

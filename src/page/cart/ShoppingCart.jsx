@@ -30,7 +30,7 @@ function ShoppingCart({ products, onHandleQuatity, onRemoveProduct }) {
                             </div>
                             <div className='shoppingCart_product--detail'>
                                 <h2 style={{ fontWeight: 'bold' }}>{product_name}</h2>
-                                <p>Color:{product_des}</p>
+                                <p>Color:'color'</p>
                                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                                     <SvgIconCancel
                                         onClick={() => onRemoveProduct(productId)} />

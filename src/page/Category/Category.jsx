@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Myy_Image from '../../assets/images/Header.jpg';
 import Footer from '../../assets/images/Newsletter.png';
-import "./style.scss";
-import { ReactComponent as IconStartA } from '../../assets/svg/icon_startA.svg';
 import { ReactComponent as IconArrowL } from '../../assets/svg/icon_arrowL.svg';
-import { Link } from 'react-router-dom';
+import { ReactComponent as IconStartA } from '../../assets/svg/icon_startA.svg';
+import "./style.scss";
 
-import { object } from 'yup';
 import axios from 'axios';
 
 const categories = [
-    { title: 'Novelties', id: '1' },
-    { title: 'Chairs & Benches', id: '2' },
-    { title: 'Tables', id: '3' },
-    { title: 'Sofas', id: '4' },
-    { title: 'Beds', id: '5' },
-    { title: 'Starage & Shelves', id: '6' },
-    { title: 'Office', id: '7' },
-    { title: 'Lamps', id: '8' },
+    { title: 'Novelties', id: '1', type: 'nove' },
+    { title: 'Chairs & Benches', id: '2', type: 'chair' },
+    { title: 'Tables', id: '3', type: 'nove' },
+    { title: 'Sofas', id: '4', type: 'nove' },
+    { title: 'Beds', id: '5', type: 'nove' },
+    { title: 'Starage & Shelves', id: '6', type: 'nove' },
+    { title: 'Office', id: '7', type: 'nove' },
+    { title: 'Lamps', id: '8', type: 'nove' },
 
 ]
 const products = [
@@ -77,19 +76,23 @@ const products = [
     },
 ]
 function Category(props) {
-    const [currentCategory, setCurrentCategory] = useState('Novelties')
+    const [currentCategory, setCurrentCategory] = useState('chair')
     const [productCategory, setProductCategory] = useState([])
-    const [iloadingCategory, setILoadingCategory] = useState(false)
+    const [isLoading, setisLoading] = useState(false)
     const handleCategory = (value) => {
         setCurrentCategory(value)
     }
     useEffect(() => {
+        setisLoading(true)
         const fetchProduct = async () => {
-            const data = await axios.get(`http://product/${currentCategory}`)
-            console.log(data)
+            const data = await axios.get(`http://localhost:8080/api/v1/product/${currentCategory}`)
+            console.log('check data ', data)
             setProductCategory(data.data.metadata)
         }
+        fetchProduct()
+        setisLoading(false)
     }, [currentCategory])
+    if (isLoading) return <h1>Loading....</h1>
     return (
         <div className='category'>
             <div className='aa' style={{ display: 'flex', alignItems: 'center' }}>
@@ -104,15 +107,15 @@ function Category(props) {
             <div className='Body'>
                 <div className='list' style={{}}>
                     {categories.map((item, index) => (
-                        <Link><p>{item.title}</p></Link>
+                        <div onClick={() => handleCategory(item.type)}><p>{item.title}</p></div>
                     ))}
                 </div>
                 <div className='grid_container'>
-                    {products.map((product, index) => (
+                    {productCategory.map((product, index) => (
                         <div className={`item${index} content`}>
                             <div className={`item${index}`}>
-                                <div>
-                                    <img src={product.product_thumbnai} alt='' style={{ width: '100%', height: '100%' }} />
+                                <Link to={`/product/${product.id}`}>
+                                    <img src={product.product_thumbnail} alt='' style={{ width: '100%', height: '100%' }} />
                                     <div className='Details'>
                                         <IconStartA />
                                         <IconStartA />
@@ -122,7 +125,7 @@ function Category(props) {
                                         <h2>{product.product_name}</h2>
                                         <h4>${product.product_price}</h4>
                                     </div>
-                                </div>
+                                </Link>
                             </div>
                         </div>
                     ))}
