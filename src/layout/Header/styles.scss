@@ -76,6 +76,7 @@
       }
     }
     &--icon {
+      position: relative;
       @include placeItem;
       font-weight: 700;
       gap: 12px;
@@ -83,6 +84,18 @@
       }
       & i {
         @include iconbutton;
+      }
+      &---topcart {
+        position: absolute;
+        right: 0;
+        top: -5px;
+        background-color: $green;
+        border-radius: 50%;
+        display: flex;
+        place-content: center;
+        place-items: center;
+        width: 20px;
+        height: 20px;
       }
     }
     &--iconMenu {

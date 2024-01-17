@@ -5,24 +5,21 @@ const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzYjlkODVkLWZh
 export const ProductCartContext = ({ children }) => {
 
     const [dataProduct, setDataProduct] = useState(null)
-    const handleQuantity = (productId, type) => {
-        let newDataProduct;
+    const [isLoadCart, setIsLoadCart] = useState(false)
+    const handleQuantity = async (productId, type) => {
+
         const indexOfProduct = dataProduct.findIndex((product) => product.productId === productId)
 
         if (type === 'down' && dataProduct[indexOfProduct].quantity > 0) {
-            newDataProduct = dataProduct.toSpliced(indexOfProduct, 1, { ...dataProduct[indexOfProduct], quantity: (dataProduct[indexOfProduct].quantity - 1) })
-            if (newDataProduct[indexOfProduct].quantity === 0) {
-                return handleRemoveProduct(newDataProduct[indexOfProduct].productId)
-            }
-            setDataProduct(newDataProduct)
+            // newDataProduct = dataProduct.toSpliced(indexOfProduct, 1, { ...dataProduct[indexOfProduct], quantity: (dataProduct[indexOfProduct].quantity - 1) })
+            // if (newDataProduct[indexOfProduct].quantity === 0) {
+            //     return handleRemoveProduct(newDataProduct[indexOfProduct].productId)
+            // }
+            // setDataProduct(newDataProduct)
+            await handleReduceProductToCart(productId)
         }
         else if (type === 'up') {
-            newDataProduct = dataProduct.toSpliced(indexOfProduct, 1,
-                {
-                    ...dataProduct[indexOfProduct],
-                    quantity: (dataProduct[indexOfProduct].quantity + 1)
-                })
-            setDataProduct(newDataProduct)
+            await handleAddProductToCart(productId)
         }
     }
     const handleRemoveProduct = (productId) => {
@@ -30,6 +27,36 @@ export const ProductCartContext = ({ children }) => {
         const indexOfProduct = dataProduct.findIndex((product) => product.productId === productId)
         newDataProduct = dataProduct.toSpliced(indexOfProduct, 1)
         setDataProduct(newDataProduct)
+    }
+    const handleAddProductToCart = async (productId) => {
+        try {
+            const addAction = await axios.post('http://localhost:8080/api/v1/cart', {
+                cart_productId: productId
+            }, {
+                headers: {
+                    'Authorization': fakeToken
+                }
+            })
+            setIsLoadCart(!isLoadCart)
+            console.log('check Action cart', addAction)
+        } catch (error) {
+            console.log('check error', error)
+        }
+    }
+    const handleReduceProductToCart = async (productId) => {
+        try {
+            const addAction = await axios.put('http://localhost:8080/api/v1/cart', {
+                productId: productId
+            }, {
+                headers: {
+                    'Authorization': fakeToken
+                }
+            })
+            setIsLoadCart(!isLoadCart)
+            console.log('check Action cart', addAction)
+        } catch (error) {
+            console.log('check error', error)
+        }
     }
     useEffect(() => {
         const fetchData = async () => {
@@ -46,9 +73,9 @@ export const ProductCartContext = ({ children }) => {
         } catch (error) {
             console.log('error occur :::::: ', error.message)
         }
-    }, [])
+    }, [isLoadCart])
     return (
-        <CartContext.Provider value={{ dataProduct, handleQuantity, handleRemoveProduct }}>
+        <CartContext.Provider value={{ dataProduct, handleQuantity, handleRemoveProduct, handleAddProductToCart }}>
             {children}
         </CartContext.Provider>
     );

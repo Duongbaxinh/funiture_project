@@ -5,7 +5,7 @@ import { ReactComponent as SvgIconArrowRS } from '../../assets/svg/icon_arrowRS.
 import { ReactComponent as SvgIconStar } from '../../assets/svg/icon_startA.svg';
 import LinkHeader from '../../components/smaler/LinkHeader/LinkHeader';
 import { SwiperSlide, Swiper } from 'swiper/react'
-
+import { useToast } from '@chakra-ui/react'
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,6 +14,7 @@ import QuantityButton from '../../components/medium/QuantityButton/QuantityButto
 import { rate } from '../../util/CaculateReview';
 import CardReview from '../../components/smaler/CardReview/CardReview';
 import axios from 'axios';
+import { CartContextState } from '../../context/ProductCartContext';
 const product = {
     id: '1',
     product_name: 'ZENSO LOUNGE',
@@ -83,11 +84,18 @@ const reviews = [
         createAt: Date.now()
     }
 ]
+const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzYjlkODVkLWZhZGUtNDFmZC05N2NkLWE5YTU0ZGJiMzhlZCIsImVtYWlsIjoieGluaEBnbWFpbC5jb20iLCJpYXQiOjE3MDU0MTM3ODIsImV4cCI6MTcwNTU4NjU4Mn0.eogeJl35nT7hdAGWJotvx8we8Gyuxhr4pSLEb5DAYIM'
 
 function Product(props) {
+    const { handleAddProductToCart } = CartContextState()
     const [dataProduct, setDataProduct] = useState(null)
+
     const { productId } = useParams()
     const [imageShow, setImageShow] = useState(null)
+    const handleAddToCard = async () => {
+        await handleAddProductToCart(productId)
+
+    }
     useEffect(() => {
         const fetchData = async () => {
             const { data } = await axios.get(`http://localhost:8080/api/v1/product/detail/${productId}`)
@@ -138,7 +146,6 @@ function Product(props) {
                                     <div className='itemImage'
                                         onClick={() => setImageShow(img)}
                                         style={{ aspectRatio: 217 / 217 }}
-
                                     >
                                         <img src={img} alt="" style={{ width: '100%', height: '100%' }} />
                                     </div>
@@ -181,7 +188,9 @@ function Product(props) {
                                 Wish List
                             </button>
                         </div>
-                        <button className='product_detail-info--add' >
+                        <button className='product_detail-info--add'
+                            onClick={handleAddToCard}
+                        >
                             Add to cart
                         </button>
                         <hr />

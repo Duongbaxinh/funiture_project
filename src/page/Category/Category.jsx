@@ -52,7 +52,10 @@ function Category(props) {
             <div className='Body'>
                 <div className='list' style={{}}>
                     {categories.map((item, index) => (
-                        <div key={index} onClick={() => handleCategory(item.type)}><p>{item.title}</p></div>
+                        <div key={index}
+                            onClick={() => handleCategory(item.type)}
+                        ><p className={`${item.type === currentCategory ? 'selected' : ''}`}>{item.title}</p>
+                        </div>
                     ))}
                 </div>
                 <div className='grid_container'>

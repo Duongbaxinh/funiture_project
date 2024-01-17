@@ -102,18 +102,22 @@ function Header(props) {
     const icons = [
         {
             handle: handleShowCart,
-            icon: <SvgIconSearch />
+            icon: <SvgIconSearch />,
+            link: '#'
         },
         {
             handle: handleShowCart,
-            icon: <SvgIconUser />
+            icon: <SvgIconUser />,
+            link: '#'
         },
         {
             handle: handleShowCart,
-            icon: <SvgIconCart />
+            icon: <SvgIconCart />,
+            link: '#'
         },
 
     ]
+    if (!dataProduct) return <h1>Loading...</h1>
     return (
         <div ref={headerRef} className='header'>
             <div className='header_top'>
@@ -182,9 +186,12 @@ function Header(props) {
                     <h1 className='header_bottom--icon'>Iconic</h1>}
                 <TabPage />
                 <div className='header_bottom--icon'>
-                    {icons.map(({ handle, icon }, index) =>
-                        <i key={index} onClick={handle}>{icon}</i>
+                    {icons.map(({ handle, icon, link }, index) =>
+                        <Link to={`/${link}`}><i key={index} onClick={handle}>{icon}</i></Link>
                     )}
+                    <div className="header_bottom--icon---topcart">
+                        {dataProduct.length}
+                    </div>
                 </div>
                 {
                     showCart &&

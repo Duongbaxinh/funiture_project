@@ -1,6 +1,7 @@
 import React from 'react';
 import { ReactComponent as SvgIconCancel } from '../../../assets/svg/icon_cancel.svg';
 import QuantityButton from '../../../components/medium/QuantityButton/QuantityButton';
+import { Link } from 'react-router-dom';
 function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
     return (
         <>
@@ -23,7 +24,6 @@ function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
                                 </div>
                                 <div className='shoppingCart_product--detail' >
                                     <h2 style={{ fontWeight: 'bold' }}>{product_name}</h2>
-                                    <p>Color:{product_des}</p>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                                         <SvgIconCancel
                                             onClick={() => onRemoveProduct(productId)} />
@@ -45,9 +45,10 @@ function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
 
             )
             )}
-            <button className='cart_checkoutPrice--btn'
-
-            >CHECKOUT</button>
+            <Link to={'/cart'}>
+                <button className='cart_checkoutPrice--btn'
+                >CHECKOUT</button>
+            </Link>
         </>
     );
 }
