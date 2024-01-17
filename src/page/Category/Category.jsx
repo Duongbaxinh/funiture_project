@@ -19,62 +19,7 @@ const categories = [
     { title: 'Lamps', id: '8', type: 'nove' },
 
 ]
-const products = [
-    {
-        product_id: 1,
-        product_name: '1.3 Chair',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704167372/Furniture_web/Paste_image_ddv9ls.png'
-    },
-    {
-        product_id: 2,
-        product_name: 'Kuyu Desk',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-    {
-        product_id: 3,
-        product_name: 'Neat Noon',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-    {
-        product_id: 4,
-        product_name: '1.3 Chair',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-    {
-        product_id: 5,
-        product_name: 'Morph',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-    {
-        product_id: 6,
-        product_name: '1.3 Chair',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-    {
-        product_id: 7,
-        product_name: 'BONDT - round',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-    {
-        product_id: 8,
-        product_name: '1.3 Chair',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-    {
-        product_id: 9,
-        product_name: '1.3 Chair',
-        product_price: 69.90,
-        product_thumbnai: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1704169683/Furniture_web/Paste_image_an2jwm.png'
-    },
-]
+
 function Category(props) {
     const [currentCategory, setCurrentCategory] = useState('chair')
     const [productCategory, setProductCategory] = useState([])
