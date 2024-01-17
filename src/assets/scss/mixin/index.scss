@@ -46,6 +46,10 @@
   background-color: $bg;
   border: $border;
   color: $color;
+  &:hover {
+    color: black;
+    font-weight: 600;
+  }
 }
 @mixin breakPoint($point) {
   @if ($point == "phone") {

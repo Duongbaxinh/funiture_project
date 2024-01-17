@@ -12,9 +12,10 @@ import { ReactComponent as SvgIconSearch } from '../../assets/svg/icon_search.sv
 import { ReactComponent as SvgIconShop } from '../../assets/svg/icon_store.svg';
 import { ReactComponent as SvgIconUser } from '../../assets/svg/icon_user.svg';
 import DrawerContrainer from '../../components/smaler/Drawer/DrawerContrainer';
-import GroupButton from '../../components/smaler/GroupButton/GroupButton';
+import Search from './Search';
 import { CartContextState } from '../../context/ProductCartContext';
-import CardSmall from '../../page/Cart/CardSmall/CardSmall';
+import CardSmall from '../../page/cart/CardSmall/CardSmall';
+import GroupButton from '../../components/smaler/GroupButton/GroupButton'
 import TabPage from './TabPage';
 import './styles.scss';
 Header.propTypes = {
