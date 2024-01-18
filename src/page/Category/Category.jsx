@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Myy_Image from '../../assets/images/Header.jpg';
 import Footer from '../../assets/images/Newsletter.png';
+import { ReactComponent as IconMail } from '../../assets/svg/icon_mail.svg';
+import imagePlaceholder from '../../assets/image/imagePlaceholder.png';
 import { ReactComponent as IconArrowL } from '../../assets/svg/icon_arrowL.svg';
 import { ReactComponent as IconStartA } from '../../assets/svg/icon_startA.svg';
 import "./style.scss";
 
 import axios from 'axios';
-
+const newslettter =
+{
+    id: 1,
+    title: 'Join Our Newsletter',
+    details: 'Sign up for deals, new products and promotions',
+    background: imagePlaceholder
+}
 const categories = [
     { title: 'Novelties', id: '1', type: 'nove' },
     { title: 'Chairs & Benches', id: '2', type: 'chair' },
@@ -62,17 +70,23 @@ function Category(props) {
                     {productCategory.map((product, index) => (
                         <div className={`item${index} content`}>
                             <div className={`item${index}`}>
-                                <Link to={`/product/${product.id}`}>
+                                <div className="images">
                                     <img src={product.product_thumbnail} alt='' style={{ width: '100%', height: '100%' }} />
-                                    <div className='Details'>
-                                        <IconStartA />
-                                        <IconStartA />
-                                        <IconStartA />
-                                        <IconStartA />
-                                        <IconStartA />
-                                        <h2>{product.product_name}</h2>
-                                        <h4>${product.product_price}</h4>
-                                    </div>
+                                </div>
+                                <div className='Details'>
+                                    <IconStartA />
+                                    <IconStartA />
+                                    <IconStartA />
+                                    <IconStartA />
+                                    <IconStartA />
+                                    <h2>{product.product_name}</h2>
+                                    <h4>${product.product_price}</h4>
+                                </div>
+
+                            </div>
+                            <div className="item_over">
+                                <Link to={`/product/${product.id}`}>
+                                    <button>View Detail</button>
                                 </Link>
                             </div>
                         </div>
@@ -80,8 +94,16 @@ function Category(props) {
                 </div>
 
             </div>
-            <div className='Footer'>
-                <img src={Footer} alt='' style={{ width: '100%', height: '200px' }} />
+            <div className="newsletter">
+                <img src={newslettter.background} alt="" />
+                <div className='newsleter_content'>
+                    <h1>{newslettter.title}</h1>
+                    <p>{newslettter.details}</p>
+                    <div className="input_form">
+                        <IconMail /><input type="text" placeholder='Email address' />
+                        <button>Sign Up</button>
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -1,0 +1,7 @@
+@import "../../../assets/scss/mixin/index.scss";
+@import "../../../assets/scss/variable/colors.scss";
+.cardSearch {
+  @include placeItem($item: center);
+  width: 100%;
+  gap: 30px;
+}

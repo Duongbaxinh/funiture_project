@@ -4,13 +4,16 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ProductCartContext } from './context/ProductCartContext';
+import { PageContext } from './context/PageContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ProductCartContext>
-      <App />
-    </ProductCartContext>
+    <PageContext>
+      <ProductCartContext>
+        <App />
+      </ProductCartContext>
+    </PageContext>
   </React.StrictMode>
 );
 

@@ -44,8 +44,8 @@ const tabPage = [
 
     },
     {
-        nameTab: 'Contact Us',
-        endPoint: '/contact',
+        nameTab: 'Blog',
+        endPoint: '/blog',
         icon: <MdEmail />
     },
 ]
@@ -65,6 +65,7 @@ function Header(props) {
         height: window.scrollY
     })
     const [citySelected, setCitySelected] = useState(address[0])
+    const [isSearch, setIsSearch] = useState(false)
     const [showAddress, setShowAddress] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [isSelected, setIsSelected] = useState(0)
@@ -87,6 +88,9 @@ function Header(props) {
         console.log('check run show cart', showCart)
         setShowCart(!showCart)
     }
+    const handleSearch = () => {
+        setIsSearch(!isSearch)
+    }
     useEffect(() => {
         try {
             const updateWidth = () => {
@@ -101,7 +105,7 @@ function Header(props) {
     }, [screen])
     const icons = [
         {
-            handle: handleShowCart,
+            handle: handleSearch,
             icon: <SvgIconSearch />,
             link: '#'
         },
@@ -187,7 +191,7 @@ function Header(props) {
                 <TabPage />
                 <div className='header_bottom--icon'>
                     {icons.map(({ handle, icon, link }, index) =>
-                        <Link to={`/${link}`}><i key={index} onClick={handle}>{icon}</i></Link>
+                        <i key={index} onClick={handle}>{icon}</i>
                     )}
                     <div className="header_bottom--icon---topcart">
                         {dataProduct.length}
@@ -206,7 +210,8 @@ function Header(props) {
 
                 }
             </div>
-            {/* <Search /> */}
+            {isSearch && <Search setIsSearch={setIsSearch} />}
+
         </div>
     );
 }

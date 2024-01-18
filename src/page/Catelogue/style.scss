@@ -1,0 +1,60 @@
+@import "../../assets/scss/mixin/index.scss";
+@import "../../assets/scss/variable/colors.scss";
+.catelogue {
+  margin-top: 100px;
+}
+h1 {
+  font-weight: bold;
+}
+.itemt0 {
+  grid-area: itemt0;
+}
+.itemt1 {
+  grid-area: itemt1;
+}
+.itemt2 {
+  grid-area: itemt2;
+}
+.itemt3 {
+  grid-area: itemt3;
+}
+.itemt4 {
+  grid-area: itemt4;
+}
+.itemt5 {
+  grid-area: itemt5;
+}
+.itemt6 {
+  grid-area: itemt6;
+}
+.itemt7 {
+  grid-area: itemt7;
+}
+.itemt8 {
+  grid-area: itemt8;
+}
+.itemt9 {
+  grid-area: itemt9;
+}
+.itemt10 {
+  grid-area: itemt10;
+}
+.itemt11 {
+  grid-area: itemt11;
+}
+.itemt12 {
+  grid-area: itemt12;
+}
+.grid_container2 {
+  display: grid;
+  width: 100%;
+  gap: 15px;
+  grid-template-areas:
+    "itemt0 itemt1 itemt2 itemt3"
+    "itemt4 itemt5 itemt6 itemt7"
+    "itemt8 itemt8 itemt9 itemt10"
+    "itemt8 itemt8 itemt11 itemt12";
+}
+.Body {
+  display: flex;
+}

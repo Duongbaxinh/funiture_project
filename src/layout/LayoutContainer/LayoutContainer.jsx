@@ -1,16 +1,18 @@
 import React from 'react';
-import { Navigate, Outlet, useOutlet } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate, useOutlet } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 const PrivateRouter = ({ children, enable }) => {
-    if (!enable) return children;
+    const navigate = useNavigate()
+    if (enable) return children;
     const userInfo = localStorage.getItem('userInfo')
+    console.log('check userInfo', userInfo)
     // eslint-disable-next-line no-unused-expressions
-    userInfo ? children : <Navigate to={'/login'} />
+    userInfo ? children : navigate('/login')
 }
 const LayoutContainer = ({
-    isPrivateRouter = false,
+    isPrivateRouter = true,
     showHeader = true,
     showFooter = true
 }) => {

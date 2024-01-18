@@ -6,6 +6,7 @@ function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
     return (
         <>
             {/* PRODUCT */}
+            <h1>Cart</h1>
             {products.map(({
                 productId,
                 product_name,

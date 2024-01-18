@@ -19,8 +19,8 @@ const tabPage = [
         endPoint: '/product'
     },
     {
-        nameTab: 'Contact Us',
-        endPoint: '/contact'
+        nameTab: 'Blog',
+        endPoint: '/blog'
     },
 ]
 function TabPage({ colorText }) {

@@ -60,62 +60,65 @@ function Cart(props) {
             <LinkHeader titlePage={'Cart'} />
             <h1 style={{ fontWeight: 'bold' }}>SHOPPING CART</h1>
             <GroupStepCard steps={steps} currentStep={currentStep} />
-            <> {
-                currentStep >= 2 ?
-                    (<Commplement />) :
-                    (
-                        <div className="cart_checkout">
-                            <>
-                                <div className='cart_checkoutProduct'>
-                                    {currentStep < 1 && <ShoppingCart products={dataProduct}
-                                        onHandleQuatity={handleQuantity}
-                                        onRemoveProduct={handleRemoveProduct}
-                                    />}
-                                    {currentStep === 1 && <ContactInformation onStep={handleUpStep} />}
-                                    <div className="cart_coupon">
-                                        <h1>Have a coupon?</h1>
-                                        <p>Add your code for an instant cart discount</p>
-                                        <div className="cart_coupon--code">
-                                            <div style={{
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                gap: '5px'
-                                            }}>
-                                                <i><SvgIconPercent /></i>
-                                                <p>Coupon code</p></div>
-                                            <p>Apply</p>
+            {dataProduct.length > 1 ? (
+                <> {
+                    currentStep >= 2 ?
+                        (<Commplement />) :
+                        (
+                            <div className="cart_checkout">
+                                <>
+                                    <div className='cart_checkoutProduct'>
+                                        {currentStep < 1 && <ShoppingCart products={dataProduct}
+                                            onHandleQuatity={handleQuantity}
+                                            onRemoveProduct={handleRemoveProduct}
+                                        />}
+                                        {currentStep === 1 && <ContactInformation onStep={handleUpStep} />}
+                                        <div className="cart_coupon">
+                                            <h1>Have a coupon?</h1>
+                                            <p>Add your code for an instant cart discount</p>
+                                            <div className="cart_coupon--code">
+                                                <div style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '5px'
+                                                }}>
+                                                    <i><SvgIconPercent /></i>
+                                                    <p>Coupon code</p></div>
+                                                <p>Apply</p>
+                                            </div>
                                         </div>
+                                    </div></>
+                                <div className="cart_checkoutPrice">
+                                    <h1>Cart Summary</h1>
+                                    {shippings.map(({ title, value, price }, index) =>
+                                        <CardShipping key={index}
+                                            title={title}
+                                            value={value}
+                                            tralling={price}
+                                            onFunction={handleChooseShipping}
+                                            name={'shipping'}
+                                        />)}
+                                    <div className="cart_checkoutPrice--total">
+                                        <p>Subtotal</p>
+                                        <p>{caculatePriceCart(dataProduct)}$</p>
                                     </div>
-                                </div></>
-                            <div className="cart_checkoutPrice">
-                                <h1>Cart Summary</h1>
-                                {shippings.map(({ title, value, price }, index) =>
-                                    <CardShipping key={index}
-                                        title={title}
-                                        value={value}
-                                        tralling={price}
-                                        onFunction={handleChooseShipping}
-                                        name={'shipping'}
-                                    />)}
-                                <div className="cart_checkoutPrice--total">
-                                    <p>Subtotal</p>
-                                    <p>{caculatePriceCart(dataProduct)}$</p>
+                                    <hr style={{ width: '100%' }} />
+                                    <div className="cart_checkoutPrice--total">
+                                        <p>TOTAL</p>
+                                        <p>{caculatePriceCart(dataProduct) + shipping}$</p>
+                                    </div>
+                                    <button className='cart_checkoutPrice--btn'
+                                        onClick={handleUpStep}
+                                    >CHECKOUT</button>
                                 </div>
-                                <hr style={{ width: '100%' }} />
-                                <div className="cart_checkoutPrice--total">
-                                    <p>TOTAL</p>
-                                    <p>{caculatePriceCart(dataProduct) + shipping}$</p>
-                                </div>
-                                <button className='cart_checkoutPrice--btn'
-                                    onClick={handleUpStep}
-                                >CHECKOUT</button>
                             </div>
-                        </div>
-                    )
-            }
+                        )
+                }
 
-
-            </>
+                </>
+            ) : (<div>
+                no product
+            </div>)}
 
         </div>
     );

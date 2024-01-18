@@ -18,6 +18,38 @@
 }
 .content {
   border: 0.5px solid green;
+  padding: 15px;
+  position: relative;
+  &:hover .item_over {
+    visibility: visible;
+  }
+}
+.item_over {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba($color: #000000, $alpha: 0.2);
+  & button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 0.5px solid white;
+    &:hover {
+      box-shadow: 5px 5px 10px 1px white;
+    }
+  }
+}
+.images {
+  aspect-ratio: 123/123;
+  & img {
+    width: 100%;
+    height: 100%;
+  }
 }
 .item0 {
   grid-area: item0;
@@ -38,9 +70,6 @@
   grid-area: item5;
 }
 .item6 {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
   grid-area: item6;
 }
 .item7 {
@@ -49,6 +78,7 @@
 .item8 {
   grid-area: item8;
 }
+
 .grid_container {
   display: grid;
   width: 100%;

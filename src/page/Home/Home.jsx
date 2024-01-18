@@ -1,57 +1,21 @@
-import React from 'react';
-import './styles.scss';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import imagebanner from '../../assets/image/Banner.jpg'
-import cardsquare from '../../assets/image/cardsquare.jpg'
-import cardSmall1 from '../../assets/image/cardSmall1.png'
-import cardSmall2 from '../../assets/image/cardSmall2.png'
-import cardSmall3 from '../../assets/image/cardSmall3.png'
-import cardSmall4 from '../../assets/image/cardSmall4.png'
-import cardBlock1 from '../../assets/image/cardBlock1.png'
-import cardBlock2 from '../../assets/image/cardBlock2.png'
-import cardBlock3 from '../../assets/image/cardBlock3.png'
-import cardsThumbnail from '../../assets/image/cardsThumbnail.png'
-import frameThumbnail from '../../assets/image/frameThumbnail.png'
-import imagePlaceholder from '../../assets/image/imagePlaceholder.png'
+import imagebanner from '../../assets/image/Banner.jpg';
+import cardBlock1 from '../../assets/image/cardBlock1.png';
+import cardBlock2 from '../../assets/image/cardBlock2.png';
+import cardBlock3 from '../../assets/image/cardBlock3.png';
+import cardsThumbnail from '../../assets/image/cardsThumbnail.png';
+import frameThumbnail from '../../assets/image/frameThumbnail.png';
+import imagePlaceholder from '../../assets/image/imagePlaceholder.png';
 import { ReactComponent as IconMail } from '../../assets/svg/icon_mail.svg';
+import './styles.scss';
 const banner = {
     product_name: 'Masterpieces crafted from solid wood',
     product_des: 'Since 1990, Iconic has been producing ecological furniture. We stand for a modern, minimalist design vocabulary and a sustainable approach to design',
     product_thumbnail: imagebanner
 }
 
-const Novelties = [
-    {
-        product_id: 1,
-        product_name: 'BONDT - round',
-        product_des: 'Design by Merit Frank, Nana Gröner, 2010',
-        product_thumbnail: cardsquare,
-    },
-    {
-        product_id: 2,
-        product_name: '1.3 Chair',
-        product_des: 'Design by Merit Frank, Nana Gröner, 2010',
-        product_thumbnail: cardSmall1,
-    },
-    {
-        product_id: 1,
-        product_name: 'Kuyu Desk',
-        product_des: 'Design by Merit Frank, Nana Gröner, 2010',
-        product_thumbnail: cardSmall2,
-    },
-    {
-        product_id: 1,
-        product_name: 'Neat Noon',
-        product_des: 'Design by Merit Frank, Nana Gröner, 2010',
-        product_thumbnail: cardSmall3,
-    },
-    {
-        product_id: 1,
-        product_name: 'Denis Mahn',
-        product_des: 'Design by Merit Frank, Nana Gröner, 2010',
-        product_thumbnail: cardSmall4,
-    },
-]
 const cardBlock = [
     {
         product_id: 1,
@@ -96,13 +60,25 @@ const newslettter =
 }
 
 function Home(props) {
+    const [dataProduct, setDataProduct] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    useEffect(() => {
+        setIsLoading(true)
+        const fetchData = async () => {
+            const { data } = await axios.get(`http://localhost:8080/api/v1/product`)
+            setDataProduct(data.metadata)
+            setIsLoading(false)
+        }
+        fetchData()
+    }, [])
+    if (isLoading) return <h1> Loading....</h1>
     return (
         <div className="blocks">
             <div className="blocks_screens">
                 <div className="blocks_screens--titles">
                     <h1>{banner.product_name}</h1>
                     <p>{banner.product_des}</p>
-                    <Link to = {'/blog'}><button>Details</button></Link>
+                    <Link to={'/blog'}><button>Details</button></Link>
                 </div>
                 <div className="blocks_screens--images">
                     <img src={banner.product_thumbnail} alt={banner.product_thumbnail} />
@@ -110,32 +86,32 @@ function Home(props) {
             </div>
             <h1 style={{ fontWeight: 'bold', margin: '10px 0px' }}>NOVELTIES</h1>
             <div className="novelties">
-
-                {Novelties.map((product, index) => (
+                {dataProduct.slice(0, 5).map((product, index) => (
                     <div className={`novelties_item${index}`}>
-                        <div className={`img${index}`}><img src={product.product_thumbnail} alt={product.product_thumbnail} /></div>
-                        <h2>{product.product_name}</h2>
-                        <p>{product.product_des}</p>
+                        <Link to={`/product/${product.id}`}>
+                            <div className={`img${index}`}><img src={product.product_thumbnail} alt={product.product_thumbnail} /></div>
+                            <h2>{product.product_name}</h2>
+                            <p>designer</p>
+                        </Link>
                     </div>
                 ))}
             </div>
             <h1 style={{ fontWeight: 'bold', margin: '10px 0px' }}>Card Blocks</h1>
-            <div className="cards_block">
+            {dataProduct.length > 0 && <div className="cards_block">
                 <div className="block_content1">
                     <div className="card1">
-                        <div className="frame1"><h2>{cardBlock[0].product_name}</h2><p>{cardBlock[0].product_des}</p></div>
-                        <div className="image1"><img src={cardBlock[0].product_thumbnail} alt={cardBlock[0].product_thumbnail} /></div>
+                        <div className="frame1"><h2>{dataProduct[5].product_name}</h2><p>{dataProduct[5].product_des}</p></div>
+                        <div className="image1"><img src={dataProduct[5].product_thumbnail} alt={dataProduct[5].product_thumbnail} /></div>
                     </div>
                     <div className="card2">
-                        <div className="image2"><img src={cardBlock[1].product_thumbnail} alt={cardBlock[1].product_thumbnail} /></div>
-
-                        <div className="frame2"><h2>{cardBlock[1].product_name}</h2><p>{cardBlock[1].product_des}</p></div>
+                        <div className="image2"><img src={dataProduct[6].product_thumbnail} alt={dataProduct[6].product_thumbnail} /></div>
+                        <div className="frame2"><h2>{dataProduct[6].product_name}</h2><p>{dataProduct[6].product_des}</p></div>
                     </div>
                 </div>
                 <div className="block_content2">
                     <img src={cardBlock[2].product_thumbnail} alt={cardBlock[2].product_thumbnail} />
                 </div>
-            </div>
+            </div>}
             <div className="cards">
                 <div className="cards_square">
                     <img src={cards[0].product_thumbnail} alt={cards[0].product_thumbnail} />
@@ -160,8 +136,6 @@ function Home(props) {
                         <button>Sign Up</button>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
