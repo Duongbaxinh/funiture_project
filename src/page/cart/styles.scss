@@ -99,10 +99,10 @@
     padding: 15px 0;
     display: grid;
     grid-template-areas:
-      "input1 input2"
-      "input3 input3"
-      "input4 input4"
-      "input5 input5";
+      "input1"
+      "input2"
+      "input3"
+      "input4";
     column-gap: 15px;
     row-gap: 15px;
     &--input {

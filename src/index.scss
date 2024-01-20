@@ -12,7 +12,6 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", "sans-serif";
-
 }
 
 a {
@@ -48,8 +47,28 @@ h4 {
   font-size: 12px;
   font-weight: normal;
 }
-
-.icon svg {
+.loading {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  place-content: center;
+  place-items: center;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #383636; /* Black */
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { CiShop } from "react-icons/ci";
 import { IoHomeSharp } from "react-icons/io5";
 import { MdEmail, MdProductionQuantityLimits } from "react-icons/md";
+import { BiLogInCircle } from "react-icons/bi";
 import { TbCategoryFilled } from "react-icons/tb";
 import { Link } from 'react-router-dom';
 import { ReactComponent as SvgIconArrowDown } from '../../assets/svg/icon_arrowDown.svg';
@@ -18,6 +19,7 @@ import CardSmall from '../../page/Cart/CardSmall/CardSmall';
 import GroupButton from '../../components/smaler/GroupButton/GroupButton'
 import TabPage from './TabPage';
 import './styles.scss';
+import { PageContext, PageContextState } from '../../context/PageContext';
 Header.propTypes = {
 
 };
@@ -38,12 +40,6 @@ const tabPage = [
         icon: <TbCategoryFilled />
     },
     {
-        nameTab: 'Product',
-        endPoint: '/product',
-        icon: <MdProductionQuantityLimits />
-
-    },
-    {
         nameTab: 'Blog',
         endPoint: '/blog',
         icon: <MdEmail />
@@ -60,6 +56,7 @@ const address = [
 function Header(props) {
     const headerRef = useRef(null)
     const { dataProduct, handleQuantity, handleRemoveProduct } = CartContextState()
+    const { userInfo } = PageContextState()
     const [screen, setScreen] = useState({
         width: window.innerWidth,
         height: window.scrollY
@@ -68,8 +65,13 @@ function Header(props) {
     const [isSearch, setIsSearch] = useState(false)
     const [showAddress, setShowAddress] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
-    const [isSelected, setIsSelected] = useState(0)
     const [showCart, setShowCart] = useState(false)
+    const [show, setShow] = useState({
+        cart: false,
+        menu: false,
+        profile: false
+    })
+    const [isSelected, setIsSelected] = useState(0)
     const handleSelected = (value) => {
         setIsSelected(value)
     }
@@ -84,8 +86,13 @@ function Header(props) {
             setShowMenu(!showMenu)
         }
     }
+    const handleShow = (type) => {
+        const showClone = { ...show }
+        showClone[type] = !showClone[type];
+        setShow(showClone)
+        console.log('check show', show)
+    }
     const handleShowCart = () => {
-        console.log('check run show cart', showCart)
         setShowCart(!showCart)
     }
     const handleSearch = () => {
@@ -107,21 +114,20 @@ function Header(props) {
         {
             handle: handleSearch,
             icon: <SvgIconSearch />,
-            link: '#'
+            link: null
         },
         {
-            handle: handleShowCart,
+            handle: () => handleShow('profile'),
             icon: <SvgIconUser />,
-            link: '#'
+            link: null
         },
         {
             handle: handleShowCart,
             icon: <SvgIconCart />,
-            link: '#'
+            link: null
         },
 
     ]
-    if (!dataProduct) return <h1>Loading...</h1>
     return (
         <div ref={headerRef} className='header'>
             <div className='header_top'>
@@ -134,7 +140,7 @@ function Header(props) {
                         <SvgIconArrowDown />
                         {showAddress && <div className='header_top--address'>
                             {address.map((item, index) =>
-                                <div
+                                <div key={index}
                                     onClick={() => handleSetCitySelected(index)}
                                     style={{ display: 'flex', gap: '5px', placeItems: 'center', }}>
                                     <i><SvgIconShop /></i>
@@ -173,14 +179,31 @@ function Header(props) {
                                                     <SvgIconCancel /></i>
                                             </div>
                                         </li>
-                                        {tabPage.map(({ nameTab, endPoint, icon }) =>
-                                            <li key={nameTab}>
-                                                <div style={{ display: 'flex', gap: '10px' }}>
-                                                    {icon}
-                                                    <Link to={endPoint}>
-                                                        {nameTab}
-                                                    </Link>
-                                                </div></li>)}
+                                        <li key={tabPage[0]}>
+                                            <div style={{ display: 'flex', gap: '10px' }}>
+                                                {tabPage[0].icon}
+                                                <Link to={tabPage[0].endPoint}>
+                                                    {tabPage[0].nameTab}
+                                                </Link>
+                                            </div></li>
+
+                                        <li key={tabPage[1]}>
+                                            <div style={{ display: 'flex', gap: '10px' }}>
+                                                {tabPage[1].icon}
+                                                <Link to={tabPage[1].endPoint}>
+                                                    {tabPage[1].nameTab}
+                                                </Link>
+                                            </div>
+                                        </li>
+
+                                        <li key={tabPage[2]}>
+                                            <div style={{ display: 'flex', gap: '10px' }}>
+                                                {tabPage[2].icon}
+                                                <Link to={tabPage[2].endPoint}>
+                                                    {tabPage[2].nameTab}
+                                                </Link>
+                                            </div></li>
+
                                     </ul>
                                 </DrawerContrainer>
                             </div>
@@ -190,8 +213,9 @@ function Header(props) {
                     <h1 className='header_bottom--icon'>Iconic</h1>}
                 <TabPage />
                 <div className='header_bottom--icon'>
+                    {!userInfo ? <Link to={'/login'}> <i><BiLogInCircle width='32px' height='32px' /></i></Link> : ''}
                     {icons.map(({ handle, icon, link }, index) =>
-                        <i key={index} onClick={handle}>{icon}</i>
+                        <Link key={index} to={link}><i key={index} onClick={handle}>{icon}</i></Link>
                     )}
                     <div className="header_bottom--icon---topcart">
                         {dataProduct.length}
@@ -207,7 +231,14 @@ function Header(props) {
                                 onRemoveProduct={handleRemoveProduct} />
                         </DrawerContrainer>
                     </div>
-
+                }
+                {
+                    show.profile &&
+                    (<div style={{ margin: '20px' }}>
+                        <DrawerContrainer position={'right'} onShowMenu={() => handleShow('profile')}>
+                            <h1>PROFILE</h1>
+                        </DrawerContrainer>
+                    </div>)
                 }
             </div>
             {isSearch && <Search setIsSearch={setIsSearch} />}

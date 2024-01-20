@@ -1,15 +1,13 @@
-import React, { useContext, createContext, useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 const CartContext = createContext();
-const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzYjlkODVkLWZhZGUtNDFmZC05N2NkLWE5YTU0ZGJiMzhlZCIsImVtYWlsIjoieGluaEBnbWFpbC5jb20iLCJpYXQiOjE3MDU0MTM3ODIsImV4cCI6MTcwNTU4NjU4Mn0.eogeJl35nT7hdAGWJotvx8we8Gyuxhr4pSLEb5DAYIM'
 export const ProductCartContext = ({ children }) => {
-
-    const [dataProduct, setDataProduct] = useState(null)
+    const [accessToken, setAccessToken] = useState('')
+    const [dataProduct, setDataProduct] = useState([])
     const [isLoadCart, setIsLoadCart] = useState(false)
+    const [ordered, setOrdered] = useState(null)
     const handleQuantity = async (productId, type) => {
-
         const indexOfProduct = dataProduct.findIndex((product) => product.productId === productId)
-
         if (type === 'down' && dataProduct[indexOfProduct].quantity > 0) {
             // newDataProduct = dataProduct.toSpliced(indexOfProduct, 1, { ...dataProduct[indexOfProduct], quantity: (dataProduct[indexOfProduct].quantity - 1) })
             // if (newDataProduct[indexOfProduct].quantity === 0) {
@@ -34,7 +32,7 @@ export const ProductCartContext = ({ children }) => {
                 cart_productId: productId
             }, {
                 headers: {
-                    'Authorization': fakeToken
+                    'Authorization': accessToken
                 }
             })
             setIsLoadCart(!isLoadCart)
@@ -49,7 +47,7 @@ export const ProductCartContext = ({ children }) => {
                 productId: productId
             }, {
                 headers: {
-                    'Authorization': fakeToken
+                    'Authorization': accessToken
                 }
             })
             setIsLoadCart(!isLoadCart)
@@ -58,15 +56,24 @@ export const ProductCartContext = ({ children }) => {
             console.log('check error', error)
         }
     }
+    const handleSetOrder = (order) => {
+        setIsLoadCart(!isLoadCart)
+        setOrdered(order)
+    }
+
     useEffect(() => {
         const fetchData = async () => {
-            const dataProductCart = await axios.get('http://localhost:8080/api/v1/cart', {
-                headers: {
-                    'Authorization': fakeToken
-                }
-            })
-            setDataProduct(dataProductCart.data.metadata)
-            console.log('check data product in cart', dataProductCart.data.metadata)
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+            if (userInfo) {
+                setAccessToken(userInfo.pairToken.accessToken)
+                const dataProductCart = await axios.get('http://localhost:8080/api/v1/cart', {
+                    headers: {
+                        'Authorization': userInfo.pairToken.accessToken
+                    }
+                })
+                setDataProduct(dataProductCart.data.metadata)
+                console.log('check data product in cart', dataProductCart.data.metadata)
+            }
         }
         try {
             fetchData()
@@ -75,7 +82,15 @@ export const ProductCartContext = ({ children }) => {
         }
     }, [isLoadCart])
     return (
-        <CartContext.Provider value={{ dataProduct, handleQuantity, handleRemoveProduct, handleAddProductToCart }}>
+        <CartContext.Provider value={{
+            dataProduct,
+            ordered,
+
+            handleQuantity,
+            handleRemoveProduct,
+            handleAddProductToCart,
+            handleSetOrder,
+        }}>
             {children}
         </CartContext.Provider>
     );

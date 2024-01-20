@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Error(props) {
+function ErrorPage(props) {
     return (
         <div >
             ERROR
@@ -8,4 +8,4 @@ function Error(props) {
     );
 }
 
-export default Error;
+export default ErrorPage;

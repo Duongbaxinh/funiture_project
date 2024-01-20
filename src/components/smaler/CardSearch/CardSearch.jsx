@@ -6,7 +6,7 @@ function CardSearch({ product, setIsSearch }) {
     return (
         <div className='cardSearch'>
             <i><IconSearch /></i>
-            <Link to={`product/${product.id}`} >
+            <Link to={`/product/${product.id}`} >
                 <div onClick={() => setIsSearch(false)}>
                     {product.product_name}
                 </div>

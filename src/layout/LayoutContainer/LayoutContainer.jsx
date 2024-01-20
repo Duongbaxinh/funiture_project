@@ -1,36 +1,25 @@
 import React from 'react';
-import { Navigate, Outlet, useNavigate, useOutlet } from 'react-router-dom';
-import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-
-const PrivateRouter = ({ children, enable }) => {
-    const navigate = useNavigate()
-    if (enable) return children;
-    const userInfo = localStorage.getItem('userInfo')
-    console.log('check userInfo', userInfo)
-    // eslint-disable-next-line no-unused-expressions
-    userInfo ? children : navigate('/login')
-}
+import Header from '../Header/Header';
+import { useNavigate } from 'react-router-dom';
 const LayoutContainer = ({
-    isPrivateRouter = true,
+    isAdmin = false,
+    isPrivate = false,
+    children,
     showHeader = true,
     showFooter = true
 }) => {
-    const ol = useOutlet();
-    let props = ol?.props;
-    while (props?.children) {
-        props = props.children.props;
+    const naviage = useNavigate()
+    if (isPrivate) {
+        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+        !userInfo && naviage('/login')
     }
     return (
         <>
-            <PrivateRouter enable={isPrivateRouter} />
             {showHeader && <Header />}
-            <Outlet />
+            <div style={{ padding: !isAdmin ? '0 60px' : '' }}>{children}</div>
             {showFooter && <Footer />}
-
         </>
-
-
     );
 }
 

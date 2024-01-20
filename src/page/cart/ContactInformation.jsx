@@ -3,25 +3,16 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup'
 import './styles.scss';
+import axios from "axios"
 import { ReactComponent as SvgIconMoney } from '../../assets/svg/icon_money.svg';
 import CardShipping from '../../components/smaler/CardShipping/CardShipping';
+import { PageContextState } from '../../context/PageContext';
+import { CartContextState } from '../../context/ProductCartContext';
 const schema = yup.object({
-    firstname: yup.string().required(),
-    lastname: yup.string().required(),
     phonenumber: yup.string().required(),
     email: yup.string().email().required(),
 }).required()
 const inputs = [
-    {
-        id: 1,
-        label: "firstname",
-        title: 'First Name',
-    },
-    {
-        id: 2,
-        label: "lastname",
-        title: 'Last Name',
-    },
     {
         id: 3,
         label: "phonenumber",
@@ -32,7 +23,6 @@ const inputs = [
         label: "email",
         title: 'Email Address',
     },
-
 ]
 const address = [
     {
@@ -50,16 +40,16 @@ const address = [
         label: "towncity",
         title: 'Town City',
     },
-    {
-        id: 4,
-        label: "state",
-        title: 'State',
-    },
-    {
-        id: 5,
-        label: "zipcode",
-        title: 'Zip Code',
-    },
+    // {
+    //     id: 4,
+    //     label: "state",
+    //     title: 'State',
+    // },
+    // {
+    //     id: 5,
+    //     label: "zipcode",
+    //     title: 'Zip Code',
+    // },
 
 ]
 const card = [
@@ -95,17 +85,33 @@ const shippings = [
 
 ]
 function ContactInformation({ onStep }) {
+    const { userInfo } = PageContextState()
+    const { dataProduct, handleSetOrder, isLoadCart, setIsLoadCart } = CartContextState()
     const { handleSubmit, register, formState: { errors } } = useForm(
         { resolver: yupResolver(schema) }
     )
-    const onSubmit = (infor) => {
-        console.log(infor);
+    const onSubmit = async (infor) => {
+        console.log('check place order', userInfo.pairToken.accessToken)
+        const { data } = await axios.post('http://localhost:8080/api/v1/order/cart', {
+            cartId: dataProduct.cartId,
+            products: dataProduct,
+            order_address: infor.street + infor.towncity + infor.country,
+            order_phone: infor.phonenumber,
+            order_shipping_method: 'unknow',
+            order_payment: 'payment on delivery'
+        }, {
+            headers: {
+                Authorization: userInfo.pairToken.accessToken
+            }
+        })
+
+        handleSetOrder(data.metadata)
         onStep()
     }
     return (
         <div className='contact'>
             <h1>Contact Information</h1>
-            <info className='contact_info'>
+            <form className='contact_info'>
                 {inputs.map(({ id, label, title }) => (
                     <div key={id} className={`contact_info--input input${id}`}>
                         <h3>{title.toUpperCase()}</h3>
@@ -115,7 +121,7 @@ function ContactInformation({ onStep }) {
                         />
                     </div>
                 ))}
-            </info>
+            </form>
 
             <h1>Shipping Address</h1>
             <form className="contact_address">
@@ -128,7 +134,6 @@ function ContactInformation({ onStep }) {
                         />
                     </div>
                 ))}
-
             </form>
 
 
@@ -146,7 +151,7 @@ function ContactInformation({ onStep }) {
                 ))}
                 <hr style={{ width: '100%' }} />
 
-                <form className="contact_paymethod--form">
+                {/* <form className="contact_paymethod--form">
                     {
                         card.map(({ id, label, title }) => (
                             <div key={id} className={`contact_paymethod--input input${id}`}>
@@ -158,7 +163,7 @@ function ContactInformation({ onStep }) {
                             </div>
                         ))
                     }
-                </form>
+                </form> */}
             </div>
             <button className='contact_paymethod--btn'
                 onClick={handleSubmit(onSubmit)}>

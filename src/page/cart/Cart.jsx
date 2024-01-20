@@ -47,7 +47,7 @@ function Cart(props) {
     const [shipping, setShipping] = useState(shippings[0].price)
 
     const handleChooseShipping = (value) => {
-        console.log('check value', value)
+
         const findShipping = shippings.find((ship) => ship.value === value)
         setShipping(findShipping.price)
     }
@@ -60,7 +60,7 @@ function Cart(props) {
             <LinkHeader titlePage={'Cart'} />
             <h1 style={{ fontWeight: 'bold' }}>SHOPPING CART</h1>
             <GroupStepCard steps={steps} currentStep={currentStep} />
-            {dataProduct.length > 1 ? (
+            {dataProduct.length > 0 ? (
                 <> {
                     currentStep >= 2 ?
                         (<Commplement />) :

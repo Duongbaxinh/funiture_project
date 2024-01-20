@@ -151,6 +151,7 @@
   &_icon {
     @include placeItem($content: center, $item: center);
     width: 80px;
+    cursor: pointer;
     height: inherit;
     background-color: black;
     color: white;

@@ -87,7 +87,7 @@ function Home(props) {
             <h1 style={{ fontWeight: 'bold', margin: '10px 0px' }}>NOVELTIES</h1>
             <div className="novelties">
                 {dataProduct.slice(0, 5).map((product, index) => (
-                    <div className={`novelties_item${index}`}>
+                    <div key={index} className={`novelties_item${index}`}>
                         <Link to={`/product/${product.id}`}>
                             <div className={`img${index}`}><img src={product.product_thumbnail} alt={product.product_thumbnail} /></div>
                             <h2>{product.product_name}</h2>

@@ -1,0 +1,63 @@
+@import "../../assets/scss/mixin/index.scss";
+@import "../../assets/scss/variable/colors.scss";
+
+.admin {
+  display: flex;
+}
+.slideBar {
+  width: 350px;
+  height: 100vh;
+  padding: 30px;
+  position: fixed;
+  background-color: $lightGrey;
+  & ul {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  & ul li {
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px whitesmoke;
+    cursor: pointer;
+    &:hover {
+      background-color: aqua;
+    }
+  }
+}
+.context {
+  display: flex;
+  flex-direction: column;
+  place-content: flex-start;
+  height: 100vh;
+  width: 100%;
+  overflow: auto;
+  margin-left: 350px;
+  padding: 0 50px;
+}
+.productCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 10%;
+  padding: 8px;
+  background-color: $lightGrey;
+  border-radius: 15px;
+  width: 100%;
+  & > * {
+    display: flex;
+    place-items: center;
+  }
+
+  & img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+  &_action {
+    @include placeItem($content: space-evenly, $item: center);
+    & button {
+      @include iconbutton;
+    }
+  }
+}

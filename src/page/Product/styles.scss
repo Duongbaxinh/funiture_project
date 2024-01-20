@@ -18,6 +18,10 @@
     &-mainImage {
       position: relative;
       min-height: 400px;
+      max-height: 400px;
+      display: flex;
+      place-items: center;
+      place-content: center;
       aspect-ratio: 728/817;
       &--btn {
         position: absolute;

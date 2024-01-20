@@ -6,7 +6,7 @@ import { PageContextState } from '../../context/PageContext';
 import './styles.scss';
 
 function Search({ setIsSearch }) {
-    const { dataProduct, handleChange } = PageContextState()
+    const { dataProduct, handleChange, changeSearch, setChangeSearch } = PageContextState()
     const navigate = useNavigate()
     return (
         <div className='search'>
@@ -16,10 +16,12 @@ function Search({ setIsSearch }) {
                     setTimeout(() => setIsSearch(false), 200)
                 }
             } />
-            <div className="search_icon">
-                <i className='search_icon' onClick={() => {
-                    return navigate('/search')
-                }}>
+            <div className="search_icon" onClick={() => {
+                setIsSearch(false)
+                setChangeSearch(!changeSearch)
+                return navigate('/search')
+            }}>
+                <i className='search_icon'>
                     <CiSearch color='white' />
                 </i>
             </div>

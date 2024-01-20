@@ -32,64 +32,62 @@ const product = {
     ]
 
 }
-const reviews = [
-    {
-        review_id: '1',
-        review_user: {
-            name: 'Uyen Do Thi',
-            avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Uyen_umotml.png'
-        },
-        review_evaluate: 5,
-        review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
-        createAt: Date.now()
-    },
-    {
-        review_id: '2',
-        review_user: {
-            name: 'Xinh Duong Ba',
-            avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Xinh_nhuth2.png'
-        },
-        review_evaluate: 5,
-        review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
-        createAt: Date.now()
-    },
-    {
-        review_id: '3',
-        review_user: {
-            name: 'Thuy Tran Thi',
-            avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Thuy_jzhu4z.png'
-        },
-        review_evaluate: 5,
-        review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
-        createAt: Date.now()
-    },
-    {
-        review_id: '4',
-        review_user: {
-            name: 'Huy Tran Quang',
-            avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251582/Furniture_web/Huy_usud6j.jpg'
-        },
-        review_evaluate: 5,
-        review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
-        createAt: Date.now()
-    },
-    {
-        review_id: '5',
-        review_user: {
-            name: 'Phuc Nguyen Quang',
-            avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Phuc_jt0a7x.png'
-        },
-        review_evaluate: 5,
-        review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
-        createAt: Date.now()
-    }
-]
-const fakeToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMzYjlkODVkLWZhZGUtNDFmZC05N2NkLWE5YTU0ZGJiMzhlZCIsImVtYWlsIjoieGluaEBnbWFpbC5jb20iLCJpYXQiOjE3MDU0MTM3ODIsImV4cCI6MTcwNTU4NjU4Mn0.eogeJl35nT7hdAGWJotvx8we8Gyuxhr4pSLEb5DAYIM'
+// const reviews = [
+//     {
+//         review_id: '1',
+//         review_user: {
+//             name: 'Uyen Do Thi',
+//             avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Uyen_umotml.png'
+//         },
+//         review_evaluate: 5,
+//         review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
+//         createAt: Date.now()
+//     },
+//     {
+//         review_id: '2',
+//         review_user: {
+//             name: 'Xinh Duong Ba',
+//             avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Xinh_nhuth2.png'
+//         },
+//         review_evaluate: 5,
+//         review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
+//         createAt: Date.now()
+//     },
+//     {
+//         review_id: '3',
+//         review_user: {
+//             name: 'Thuy Tran Thi',
+//             avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Thuy_jzhu4z.png'
+//         },
+//         review_evaluate: 5,
+//         review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
+//         createAt: Date.now()
+//     },
+//     {
+//         review_id: '4',
+//         review_user: {
+//             name: 'Huy Tran Quang',
+//             avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251582/Furniture_web/Huy_usud6j.jpg'
+//         },
+//         review_evaluate: 5,
+//         review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
+//         createAt: Date.now()
+//     },
+//     {
+//         review_id: '5',
+//         review_user: {
+//             name: 'Phuc Nguyen Quang',
+//             avatar: 'https://res.cloudinary.com/dwu92ycra/image/upload/v1705251575/Furniture_web/Phuc_jt0a7x.png'
+//         },
+//         review_evaluate: 5,
+//         review_content: 'I bought it 3 weeks ago and now come back just to say “Awesome Product”. I really enjoy it. The product meets all my requirements and I recommend it for purchase.',
+//         createAt: Date.now()
+//     }
+// ]
 
 function Product(props) {
     const { handleAddProductToCart } = CartContextState()
     const [dataProduct, setDataProduct] = useState(null)
-
     const { productId } = useParams()
     const [imageShow, setImageShow] = useState(null)
     const handleAddToCard = async () => {
@@ -213,7 +211,7 @@ function Product(props) {
                         <i><SvgIconStar /></i>
                         <i><SvgIconStar /></i>
                     </div>
-                    <p>{rate(reviews)}    {reviews.length} reviews</p>
+                    <p>{dataProduct.reviews.length} reviews</p>
                 </div>
                 {/* INPUT */}
                 <div className="product_review-input">
@@ -221,13 +219,14 @@ function Product(props) {
                 </div>
                 {/* TITLE LABLE */}
                 <div className="product_review-titlelable">
-                    <h1>{reviews.length} reviews</h1>
+                    <h1>{dataProduct.reviews.length} reviews</h1>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                        {reviews.map((review) => (
+                        {dataProduct.reviews.map((review) => (
                             <CardReview
-                                content={review.review_content}
-                                user={review.review_user}
-                                rate={review.review_evaluate}
+                                content={review.comment_content}
+                                avatar={review.avatar}
+                                name={review.name}
+                                rate={review.comment_rate}
                                 createAt={review.createAt}
                             />
                         ))}

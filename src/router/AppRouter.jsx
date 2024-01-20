@@ -9,21 +9,31 @@ import Cart from '../page/Cart/Cart';
 import Home from '../page/Home/Home';
 import Blog from '../page/Blog/Blog';
 import Catelogue from '../page/Catelogue/Catelogue';
+import ErrorPage from '../page/Error/Error';
+import Admin from '../page/Admin/Admin';
+import EditProduct from '../page/Admin/components/EditProdct/EditProduct';
 function AppRouter(props) {
     return (
         <Router>
             <Routes>
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/' element={<LayoutContainer />}>
-                    <Route path='/category' element={<Category />} />
-                    <Route path='/search' element={<Catelogue />} />
-                    <Route path='/product/:productId' element={<Product />} />
-                    <Route path='/cart' element={<Cart />} />
-                    <Route path='/home' element={<Home />} />
-                    <Route path='/blog' element={<Blog />} />
-                    <Route errorElement={<Blog />} />
+                <Route path='/'>
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/admin' element={<LayoutContainer
+                        isAdmin={true}
+                        showFooter={false}
+                        showHeader={false}
+                        isPrivate={true}
+                    ><Admin /></LayoutContainer>} />
+                    <Route path='/home' element={<LayoutContainer><Home /></LayoutContainer>} />
+                    <Route path='/editproduct/:productId' element={<EditProduct />} />
+                    <Route path='/category' element={<LayoutContainer><Category /></LayoutContainer>} />
+                    <Route path='/product/:productId' element={<LayoutContainer><Product /></LayoutContainer>} />
+                    <Route path='/search' element={<LayoutContainer><Catelogue /></LayoutContainer>} />
+                    <Route path='/blog' element={<LayoutContainer><Blog /></LayoutContainer>} />
+                    <Route path='/cart' element={<LayoutContainer><Cart /></LayoutContainer>} />
                 </Route>
+                <Route path='*' element={<ErrorPage />} />
             </Routes>
         </Router>
     );

@@ -3,12 +3,10 @@
 
 .icon_button {
   @include iconbutton($circle: true);
-  //   background-color: $green;
 }
 
 .blocks {
   margin-top: 100px;
-  padding: 0 30px;
 
   &_screens {
     width: 100%;
@@ -32,7 +30,6 @@
         @include buttonCustome;
         width: 100px;
         margin-top: 40px;
-
       }
     }
 
@@ -54,8 +51,9 @@
 
   display: grid;
   gap: 15px;
-  grid-template-areas: 'item1 item1 item2 item4'
-  'item1 item1 item3 item5';
+  grid-template-areas:
+    "item1 item1 item2 item4"
+    "item1 item1 item3 item5";
 }
 
 .novelties_item0 {
@@ -113,8 +111,9 @@
 
   display: grid;
   gap: 15px;
-  grid-template-areas: 'item1 item1 item3 item3'
-  'item2 item2 item3 item3';
+  grid-template-areas:
+    "item1 item1 item3 item3"
+    "item2 item2 item3 item3";
 }
 
 .cardBlock_item0 {
@@ -129,12 +128,10 @@
   grid-area: item3;
 }
 
-
 .cards_block {
   margin-top: 20px;
   display: flex;
   width: 100%;
-
 }
 
 .block_content1 {
@@ -159,8 +156,6 @@
   width: 100%;
   display: flex;
 }
-
-
 
 .frame1 {
   & h2 {
@@ -257,7 +252,7 @@
   position: relative;
   & img {
     width: 100%;
-    object-fit: cover;   
+    object-fit: cover;
   }
 }
 .newsleter_content {
@@ -285,7 +280,6 @@
     gap: 8px;
     background-color: #000000;
     color: white;
-
   }
 }
 .input_form {
@@ -293,5 +287,3 @@
   align-items: center;
   margin-top: 10px;
 }
-
-

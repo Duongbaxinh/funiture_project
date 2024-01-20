@@ -14,10 +14,7 @@ const tabPage = [
         nameTab: 'Category',
         endPoint: '/category'
     },
-    {
-        nameTab: 'Product',
-        endPoint: '/product'
-    },
+
     {
         nameTab: 'Blog',
         endPoint: '/blog'

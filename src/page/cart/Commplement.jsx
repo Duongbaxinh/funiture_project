@@ -1,12 +1,8 @@
 import React from 'react';
-const inforOrder = {
-    orderCode: '#123456789',
-    date: Date.now(),
-    total: '1.500$',
-    paymentMethod: 'Credit Card',
-
-}
+import { CartContextState } from '../../context/ProductCartContext';
 function Commplement(props) {
+    const { ordered } = CartContextState()
+    console.log('check order at complete', ordered)
     return (
         <div className='complement'>
             <h1>Thank you! 🎉</h1>
@@ -14,19 +10,19 @@ function Commplement(props) {
             <div className='complement_info'>
                 <div className='complement_info--item'>
                     <p>Order code</p>
-                    <p>{inforOrder.orderCode}</p>
+                    <p>{ordered.orderCode}</p>
                 </div>
                 <div className='complement_info--item'>
                     <p>Date</p>
-                    <p>{inforOrder.date}</p>
+                    <p>{ordered.date}</p>
                 </div>
                 <div className='complement_info--item'>
                     <p>Total</p>
-                    <p>{inforOrder.total}</p>
+                    <p>{ordered.total}</p>
                 </div>
                 <div className='complement_info--item'>
                     <p>Payment Method</p>
-                    <p>{inforOrder.paymentMethod}</p>
+                    <p>{ordered.paymentMethod}</p>
                 </div>
             </div>
             <button className='cart_checkoutPrice--btn' style={{ width: "150px" }}
