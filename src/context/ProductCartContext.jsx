@@ -1,7 +1,9 @@
+import { useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 const CartContext = createContext();
 export const ProductCartContext = ({ children }) => {
+    const toast = useToast()
     const [accessToken, setAccessToken] = useState('')
     const [dataProduct, setDataProduct] = useState([])
     const [isLoadCart, setIsLoadCart] = useState(false)
@@ -9,34 +11,58 @@ export const ProductCartContext = ({ children }) => {
     const handleQuantity = async (productId, type) => {
         const indexOfProduct = dataProduct.findIndex((product) => product.productId === productId)
         if (type === 'down' && dataProduct[indexOfProduct].quantity > 0) {
-            // newDataProduct = dataProduct.toSpliced(indexOfProduct, 1, { ...dataProduct[indexOfProduct], quantity: (dataProduct[indexOfProduct].quantity - 1) })
-            // if (newDataProduct[indexOfProduct].quantity === 0) {
-            //     return handleRemoveProduct(newDataProduct[indexOfProduct].productId)
-            // }
-            // setDataProduct(newDataProduct)
             await handleReduceProductToCart(productId)
         }
         else if (type === 'up') {
             await handleAddProductToCart(productId)
         }
     }
-    const handleRemoveProduct = (productId) => {
-        let newDataProduct;
-        const indexOfProduct = dataProduct.findIndex((product) => product.productId === productId)
-        newDataProduct = dataProduct.toSpliced(indexOfProduct, 1)
-        setDataProduct(newDataProduct)
+    const handleRemoveProduct = async (productId, cartId) => {
+        const result = window.confirm('Bạn chắc muốn xóa sản phẩm này ra khỏi giỏ hàng?')
+        try {
+            if (result) {
+                const removeProductInCard = await axios.post('http://localhost:8080/api/v1/cart/delete', {
+                    cartId,
+                    productId
+                })
+                if (removeProductInCard.status === 200) {
+                    toast({
+                        title: 'Delete successfully',
+                        description: 'delete successfull',
+                        status: 'success',
+                        duration: 3000,
+                        isClosable: true,
+                    });
+                    setIsLoadCart(!isLoadCart)
+                }
+            }
+        } catch (error) {
+            toast({
+                title: 'Error',
+                description: 'Delete failure',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            });
+        }
     }
     const handleAddProductToCart = async (productId) => {
         try {
-            const addAction = await axios.post('http://localhost:8080/api/v1/cart', {
+            await axios.post('http://localhost:8080/api/v1/cart', {
                 cart_productId: productId
             }, {
                 headers: {
                     'Authorization': accessToken
                 }
             })
+            toast({
+                title: 'Sản phẩm đã được thêm vào giỏ hàng',
+                description: 'add successfull',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
             setIsLoadCart(!isLoadCart)
-            console.log('check Action cart', addAction)
         } catch (error) {
             console.log('check error', error)
         }
@@ -72,20 +98,24 @@ export const ProductCartContext = ({ children }) => {
                     }
                 })
                 setDataProduct(dataProductCart.data.metadata)
-                console.log('check data product in cart', dataProductCart.data.metadata)
             }
         }
         try {
             fetchData()
         } catch (error) {
-            console.log('error occur :::::: ', error.message)
+            toast({
+                title: 'Error',
+                description: error.message,
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     }, [isLoadCart])
     return (
         <CartContext.Provider value={{
             dataProduct,
             ordered,
-
             handleQuantity,
             handleRemoveProduct,
             handleAddProductToCart,

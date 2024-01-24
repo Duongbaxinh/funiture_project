@@ -4,6 +4,8 @@ import './styles.scss'
 function ListProduct({ products }) {
     return (
         <div className='listProduct'>
+            <h1>Quản lý sản phẩm</h1>
+
             <div style={{
                 display: 'grid',
                 width: '100%',

@@ -1,12 +1,14 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginImage from '../../assets/images/login.jpg';
 import axios from 'axios';
+import { useToast } from '@chakra-ui/react';
 
 
 function Register(props) {
-
+    const toast = useToast()
+    const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -18,9 +20,25 @@ function Register(props) {
                 email: data.email,
                 password: data.password
             })
-            console.log('check register :::: ', register)
-        } catch (error) {
+            if (register.status === 200) {
+                toast({
+                    title: 'Register successfull',
+                    description: ' successfull',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                });
+            }
+            navigate('/login')
 
+        } catch (error) {
+            toast({
+                title: 'Error',
+                description: 'error',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     }
     return (

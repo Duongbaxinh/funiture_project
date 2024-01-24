@@ -1,0 +1,48 @@
+@import "../../assets/scss/mixin/index.scss";
+@import "../../assets/scss/variable/colors.scss";
+
+.purchase {
+  height: 100%;
+  @include placeItem;
+  gap: 20px;
+  &_order {
+    @include placeItem;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 25px;
+    &--state {
+      @include placeItem($content: space-between);
+      width: 100%;
+      background-color: $lightGrey;
+      & > li {
+        color: $black;
+        padding: 6px 10px;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+    &--product {
+      width: 100%;
+      padding: 5px 10px;
+      background-color: $lightGrey;
+      min-height: 95vh;
+      max-height: 100%;
+      border-radius: 10px;
+      @include placeItem;
+      flex-direction: column;
+      gap: 15px;
+    }
+    &--not {
+      width: 100%;
+      height: 100vh;
+      @include placeItem($content: center, $item: center);
+      flex-direction: column;
+      gap: 10px;
+    }
+    &--img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+}

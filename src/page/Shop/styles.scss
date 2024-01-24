@@ -1,0 +1,66 @@
+@import "../../assets/scss/mixin/index.scss";
+@import "../../assets/scss/variable/colors.scss";
+.shop {
+  height: 100%;
+  width: 100%;
+  &_product {
+    @include placeItem;
+    padding-top: 10px;
+    gap: 30px;
+    height: 100%;
+  }
+  &_sidebar {
+    width: 250px;
+    padding: 10px;
+    background-color: $lightGrey;
+    & h2 {
+      font-weight: 500;
+      padding: 15px 0;
+    }
+    &--cate {
+      width: 100%;
+      @include placeItem;
+      flex-direction: column;
+      gap: 10px;
+      & p {
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 5px;
+        &:hover {
+          background-color: $darkGrey;
+          width: inherit;
+        }
+      }
+    }
+  }
+  &_main {
+    width: 100%;
+    &--product {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+    }
+  }
+  &_banner {
+    position: relative;
+    width: 100%;
+    height: auto;
+
+    &--button {
+      position: absolute;
+      @include placeItem($content: space-between);
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9;
+    }
+  }
+}
+
+.btn {
+  @include iconbutton($circle: true);
+  width: 50px;
+  height: 50px;
+}

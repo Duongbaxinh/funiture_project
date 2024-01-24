@@ -1,7 +1,6 @@
 @import "../../assets/scss/mixin/index.scss";
 @import "../../assets/scss/variable/colors.scss";
 .product {
-  margin-top: 100px;
   padding: 0 64px;
   @include placeItem;
   flex-direction: column;

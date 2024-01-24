@@ -1,14 +1,13 @@
 import React from 'react';
-import { ReactComponent as SvgIconCancel } from '../../../assets/svg/icon_cancel.svg';
-import QuantityButton from '../../../components/medium/QuantityButton/QuantityButton';
 import { Link } from 'react-router-dom';
-function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
+function CardSmall({ isShowCart, onShowCart, products, onRemoveProduct, onHandleQuatity }) {
     return (
         <>
             {/* PRODUCT */}
             <h1>Cart</h1>
             {products.map(({
                 productId,
+                cartId,
                 product_name,
                 product_des,
                 product_thumbnail,
@@ -17,23 +16,14 @@ function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
             }, index) =>
             (
                 <div key={index}>
-                    <div className='shoppingCart' style={{ justifyContent: 'space-between', gridTemplateColumns: '50% 20%' }}>
-                        <div className='shoppingCart_product' >
+                    <div className='shoppingCartsm' style={{ justifyContent: 'space-between', gridTemplateColumns: '50% 20%' }}>
+                        <div className='shoppingCartsm_product' >
                             <>
-                                <div className="shoppingCart_product--image" >
+                                <div className="shoppingCartsm_product--image" >
                                     <img src={product_thumbnail} alt={product_name} />
                                 </div>
-                                <div className='shoppingCart_product--detail' >
+                                <div className='shoppingCartsm_product--detail' >
                                     <h2 style={{ fontWeight: 'bold' }}>{product_name}</h2>
-                                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                        <SvgIconCancel
-                                            onClick={() => onRemoveProduct(productId)} />
-                                        Remove
-                                    </div>
-                                    <QuantityButton quantity={quantity}
-                                        onUp={() => { onHandleQuatity(productId, "up") }}
-                                        onDown={() => { onHandleQuatity(productId, "down") }}
-                                    />
                                 </div>
                             </>
 
@@ -48,7 +38,8 @@ function CardSmall({ products, onRemoveProduct, onHandleQuatity }) {
             )}
             <Link to={'/cart'}>
                 <button className='cart_checkoutPrice--btn'
-                >CHECKOUT</button>
+                    onClick={() => onShowCart(!isShowCart)}
+                >View Detail</button>
             </Link>
         </>
     );

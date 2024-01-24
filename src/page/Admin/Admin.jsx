@@ -2,10 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 
-import './styles.scss';
-import EditProduct from './components/EditProdct/EditProduct';
-import Sidebar from './components/Sidebar/Sidebar';
 import ListProduct from './components/ListProduct/ListProduct';
+import Sidebar from './components/Sidebar/Sidebar';
+import './styles.scss';
 
 function Admin(props) {
     const [products, setProducts] = useState([])
@@ -13,7 +12,7 @@ function Admin(props) {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const { data } = await axios.get('http://localhost:8080/api/v1/product')
+            const { data } = await axios.get(`http://localhost:8080/api/v1/product?limit=${50} `)
             setProducts(data.metadata)
         }
         try {

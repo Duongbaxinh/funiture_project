@@ -3,7 +3,9 @@ import LoginImage from '../../assets/images/login.jpg'
 import './Login.scss';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { useToast } from '@chakra-ui/react';
 function Login(props) {
+    const toast = useToast()
     const {
         register,
         handleSubmit,
@@ -11,16 +13,20 @@ function Login(props) {
     } = useForm()
     const navigate = useNavigate()
     const onSubmit = async (dataLogin) => {
-        console.log('check data login', dataLogin)
         try {
             const { data } = await axios.post('http://localhost:8080/api/v1/access/login', {
                 email: dataLogin.email,
                 password: dataLogin.password
             })
             localStorage.setItem('userInfo', JSON.stringify(data.metadata))
-            alert('login successfully!')
-            navigate('/home')
-            console.log('check login :::: ', data)
+            toast({
+                title: 'Login successfully!',
+                description: 'successfull',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+            navigate('/')
         } catch (error) {
             console.log(error)
         }
@@ -37,18 +43,17 @@ function Login(props) {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className='email'>
                             <input {...register("email")} type="text" placeholder="Email " />
-                            <small>{errors && 'please enter '}</small>
                         </div>
                         <div className='password'>
                             <input {...register("password")} type="password" placeholder="Password" />
                         </div>
                         <div>
 
-                            <div style={{ marginTop: '20px' }}>
+                            {/* <div style={{ marginTop: '20px' }}>
                                 <input type="checkbox" />
                                 Remember me
                                 <Link style={{ marginLeft: '95px' }}>Forgot password</Link>
-                            </div>
+                            </div> */}
                         </div>
                         <button className='Signin' type="submmit"  >
                             Sign in

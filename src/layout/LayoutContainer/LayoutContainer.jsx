@@ -17,7 +17,10 @@ const LayoutContainer = ({
     return (
         <>
             {showHeader && <Header />}
-            <div style={{ padding: !isAdmin ? '0 60px' : '' }}>{children}</div>
+            <div style={{
+                padding: !isAdmin ? '0 60px' : '',
+                marginTop: !isAdmin ? '130px' : 0
+            }}>{children}</div>
             {showFooter && <Footer />}
         </>
     );

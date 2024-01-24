@@ -1,20 +1,18 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
-import './styles.scss'
-import { ReactComponent as SvgIconArrowRS } from '../../assets/svg/icon_arrowRS.svg';
-import { ReactComponent as SvgIconStar } from '../../assets/svg/icon_startA.svg';
-import LinkHeader from '../../components/smaler/LinkHeader/LinkHeader';
-import { SwiperSlide, Swiper } from 'swiper/react'
-import { useToast } from '@chakra-ui/react'
+import { useParams } from 'react-router-dom';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { ReactComponent as SvgIconArrowRS } from '../../assets/svg/icon_arrowRS.svg';
+import { ReactComponent as SvgIconStar } from '../../assets/svg/icon_startA.svg';
 import QuantityButton from '../../components/medium/QuantityButton/QuantityButton';
-import { rate } from '../../util/CaculateReview';
 import CardReview from '../../components/smaler/CardReview/CardReview';
-import axios from 'axios';
+import LinkHeader from '../../components/smaler/LinkHeader/LinkHeader';
 import { CartContextState } from '../../context/ProductCartContext';
+import './styles.scss';
 const product = {
     id: '1',
     product_name: 'ZENSO LOUNGE',

@@ -6,8 +6,6 @@
 }
 
 .blocks {
-  margin-top: 100px;
-
   &_screens {
     width: 100%;
     display: flex;
@@ -82,7 +80,6 @@
 
 .img0 {
   aspect-ratio: 880/848;
-
   & img {
     width: 100%;
     height: 100%;

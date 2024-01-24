@@ -8,6 +8,7 @@ import { ReactComponent as SvgIconMoney } from '../../assets/svg/icon_money.svg'
 import CardShipping from '../../components/smaler/CardShipping/CardShipping';
 import { PageContextState } from '../../context/PageContext';
 import { CartContextState } from '../../context/ProductCartContext';
+import { useToast } from '@chakra-ui/react';
 const schema = yup.object({
     phonenumber: yup.string().required(),
     email: yup.string().email().required(),
@@ -73,40 +74,45 @@ const card = [
 ]
 const shippings = [
     {
-        title: 'Pay by Card Credit',
-        value: 'creditcard',
+        title: 'Thanh toán khi nhận hàng',
+        value: 'cash',
         trailing: <SvgIconMoney />
-    },
-    {
-        title: 'Paypal',
-        value: 'paypal',
-        trailing: ''
     },
 
 ]
 function ContactInformation({ onStep }) {
+    const toast = useToast()
     const { userInfo } = PageContextState()
     const { dataProduct, handleSetOrder, isLoadCart, setIsLoadCart } = CartContextState()
     const { handleSubmit, register, formState: { errors } } = useForm(
         { resolver: yupResolver(schema) }
     )
     const onSubmit = async (infor) => {
-        console.log('check place order', userInfo.pairToken.accessToken)
-        const { data } = await axios.post('http://localhost:8080/api/v1/order/cart', {
-            cartId: dataProduct.cartId,
-            products: dataProduct,
-            order_address: infor.street + infor.towncity + infor.country,
-            order_phone: infor.phonenumber,
-            order_shipping_method: 'unknow',
-            order_payment: 'payment on delivery'
-        }, {
-            headers: {
-                Authorization: userInfo.pairToken.accessToken
-            }
-        })
+        try {
+            const { data } = await axios.post('http://localhost:8080/api/v1/order/cart', {
+                cartId: dataProduct.cartId,
+                products: dataProduct,
+                order_address: infor.street + infor.towncity + infor.country,
+                order_phone: infor.phonenumber,
+                order_shipping_method: 'unknow',
+                order_payment: 'payment on delivery'
+            }, {
+                headers: {
+                    Authorization: userInfo.pairToken.accessToken
+                }
+            })
+            toast({
+                title: 'Update State Order',
+                description: 'Update successfull',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+            handleSetOrder(data.metadata)
+            onStep()
+        } catch (error) {
 
-        handleSetOrder(data.metadata)
-        onStep()
+        }
     }
     return (
         <div className='contact'>
@@ -151,19 +157,7 @@ function ContactInformation({ onStep }) {
                 ))}
                 <hr style={{ width: '100%' }} />
 
-                {/* <form className="contact_paymethod--form">
-                    {
-                        card.map(({ id, label, title }) => (
-                            <div key={id} className={`contact_paymethod--input input${id}`}>
-                                <h3>{title.toUpperCase()}</h3>
-                                <input type="text"
-                                    placeholder={`Your ${title}`}
-                                    {...register(label)}
-                                />
-                            </div>
-                        ))
-                    }
-                </form> */}
+
             </div>
             <button className='contact_paymethod--btn'
                 onClick={handleSubmit(onSubmit)}>

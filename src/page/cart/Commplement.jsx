@@ -1,5 +1,6 @@
 import React from 'react';
 import { CartContextState } from '../../context/ProductCartContext';
+import { Link } from 'react-router-dom';
 function Commplement(props) {
     const { ordered } = CartContextState()
     console.log('check order at complete', ordered)
@@ -25,8 +26,11 @@ function Commplement(props) {
                     <p>{ordered.paymentMethod}</p>
                 </div>
             </div>
-            <button className='cart_checkoutPrice--btn' style={{ width: "150px" }}
-            >PURCHASE HISTORY</button>
+            <Link to={'/purchase'}>
+                <button className='cart_checkoutPrice--btn' style={{ width: "150px" }}
+                >PURCHASE HISTORY</button>
+            </Link>
+
         </div >
     );
 }

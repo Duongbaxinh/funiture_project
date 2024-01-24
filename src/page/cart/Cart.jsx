@@ -60,7 +60,7 @@ function Cart(props) {
             <LinkHeader titlePage={'Cart'} />
             <h1 style={{ fontWeight: 'bold' }}>SHOPPING CART</h1>
             <GroupStepCard steps={steps} currentStep={currentStep} />
-            {dataProduct.length > 0 ? (
+            {(
                 <> {
                     currentStep >= 2 ?
                         (<Commplement />) :
@@ -116,9 +116,7 @@ function Cart(props) {
                 }
 
                 </>
-            ) : (<div>
-                no product
-            </div>)}
+            )}
 
         </div>
     );

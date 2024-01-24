@@ -87,37 +87,40 @@ function EditProduct() {
             fromData.append('file', value.product_thumbnail[0])
             fromData.append('upload_preset', 'furniture')
             fromData.append('cloud_name', 'dwu92ycra')
-            const { data } = await axios.post('https://api.cloudinary.com/v1_1/dwu92ycra/image/upload', fromData)
-            dataImage.product_thumbnail = data.url
-            for (let i = 0; i < value.images.length; i++) {
-                const fromData = new FormData()
-                fromData.append('file', value.images[i])
-                fromData.append('upload_preset', 'furniture')
-                fromData.append('cloud_name', 'dwu92ycra')
+            if (dataImage.product_thumbnail !== '') {
                 const { data } = await axios.post('https://api.cloudinary.com/v1_1/dwu92ycra/image/upload', fromData)
-                dataImage.product_images.push(data.url)
+                dataImage.product_thumbnail = data.url
             }
-            console.log('check product by id ', dataImage)
-            axios.put('http://localhost:8080/api/v1/product', {
+            if (dataImage.product_images.length > 0) {
+                for (let i = 0; i < value.images.length; i++) {
+                    const fromData = new FormData()
+                    fromData.append('file', value.images[i])
+                    fromData.append('upload_preset', 'furniture')
+                    fromData.append('cloud_name', 'dwu92ycra')
+                    const { data } = await axios.post('https://api.cloudinary.com/v1_1/dwu92ycra/image/upload', fromData)
+                    dataImage.product_images.push(data.url)
+                }
+            }
+            const update = await axios.put('http://localhost:8080/api/v1/product', {
                 product_id: productUpdate.id,
                 product_name: productUpdate.product_name,
                 product_des: productUpdate.product_des,
                 product_color: productUpdate.product_color,
                 product_price: productUpdate.product_price,
-                product_thumbnail: dataImage.product_thumbnail,
+                product_thumbnail: dataImage.product_thumbnail !== '' ? dataImage.product_thumbnail : productUpdate.product_thumbnail,
                 product_material: productUpdate.product_material,
                 product_measure: productUpdate.product_measure,
                 product_type: productUpdate.product_type,
                 categoryId: productUpdate.product_categoryId,
                 product_state: 'publish',
-                product_image: dataImage.product_images
+                product_image: dataImage.product_images.length > 0 ? dataImage.product_images : productUpdate.images,
             }, {
                 headers: {
                     Authorization: userInfo.pairToken.accessToken
                 }
             })
+            console.log(update)
         } catch (error) {
-            console.log(error)
             setIsUpImage(false)
         } finally {
             setIsUpImage(false)
@@ -135,7 +138,6 @@ function EditProduct() {
         }
     }, [productId])
     const handleChangeInforProduct = (e, filed) => {
-        console.log('chekkkkkkkkkkkkkkkkkkk', e.target.value)
         const { value } = e.target;
         const cloneProductUpdata = productUpdate;
         cloneProductUpdata[filed] = value;
@@ -163,14 +165,14 @@ function EditProduct() {
                                     </div>
                                 ))}
                                 <label htmlFor="product_type">product_type</label>
-                                <select className='selected' id="product_type" onChange={(e) => handleChangeInforProduct(e, productUpdate.product_type)} >
+                                <select className='selecteditem' id="product_type" onChange={(e) => handleChangeInforProduct(e, productUpdate.product_type)} >
                                     {types.map((type, index) => (
                                         <option key={index} value={type}>{type}</option>
                                     ))}
                                 </select>
                                 {/* SELECT CATEGORY */}
                                 <label htmlFor=""> Categories</label>
-                                <select className='selected' id="category" onChange={(e) => handleChangeInforProduct(e, productUpdate.categoryId)} >
+                                <select className='selecteditem' id="category" onChange={(e) => handleChangeInforProduct(e, productUpdate.categoryId)} >
                                     {category.map((cate, index) => (
                                         <option key={index} value={cate.id}>{cate.title}</option>
                                     ))}

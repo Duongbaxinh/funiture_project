@@ -5,15 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ProductCartContext } from './context/ProductCartContext';
 import { PageContext } from './context/PageContext';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ProductCartContext>
-      <PageContext>
-        <App />
-      </PageContext>
-    </ProductCartContext>
+    <ChakraProvider>
+
+      <ProductCartContext>
+        <PageContext>
+          <App />
+        </PageContext>
+      </ProductCartContext>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

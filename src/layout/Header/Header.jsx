@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CiShop } from "react-icons/ci";
-import { IoHomeSharp } from "react-icons/io5";
-import { MdEmail, MdProductionQuantityLimits } from "react-icons/md";
 import { BiLogInCircle } from "react-icons/bi";
+import { IoHomeSharp } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 import { TbCategoryFilled } from "react-icons/tb";
 import { Link } from 'react-router-dom';
 import { ReactComponent as SvgIconArrowDown } from '../../assets/svg/icon_arrowDown.svg';
@@ -13,26 +12,21 @@ import { ReactComponent as SvgIconSearch } from '../../assets/svg/icon_search.sv
 import { ReactComponent as SvgIconShop } from '../../assets/svg/icon_store.svg';
 import { ReactComponent as SvgIconUser } from '../../assets/svg/icon_user.svg';
 import DrawerContrainer from '../../components/smaler/Drawer/DrawerContrainer';
-import Search from './Search';
+import GroupButton from '../../components/smaler/GroupButton/GroupButton';
+import { PageContextState } from '../../context/PageContext';
 import { CartContextState } from '../../context/ProductCartContext';
 import CardSmall from '../../page/Cart/CardSmall/CardSmall';
-import GroupButton from '../../components/smaler/GroupButton/GroupButton'
+import Search from './Search';
 import TabPage from './TabPage';
 import './styles.scss';
-import { PageContext, PageContextState } from '../../context/PageContext';
 Header.propTypes = {
 
 };
 const tabPage = [
     {
         nameTab: 'Home',
-        endPoint: '/home',
+        endPoint: '/',
         icon: <IoHomeSharp />
-    },
-    {
-        nameTab: 'Shop',
-        endPoint: '/shop',
-        icon: <CiShop />
     },
     {
         nameTab: 'Category',
@@ -226,6 +220,8 @@ function Header(props) {
                     <div style={{ margin: '20px' }}>
                         <DrawerContrainer position={'right'} onShowMenu={handleShowCart}>
                             <CardSmall
+                                isShowCart={showCart}
+                                onShowCart={setShowCart}
                                 products={dataProduct}
                                 onHandleQuatity={handleQuantity}
                                 onRemoveProduct={handleRemoveProduct} />

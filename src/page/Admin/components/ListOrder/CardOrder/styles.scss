@@ -1,0 +1,11 @@
+.cardorderdata {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 10%;
+  & img {
+    width: 80px;
+    height: 80px;
+  }
+}

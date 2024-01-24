@@ -12,6 +12,12 @@ import Catelogue from '../page/Catelogue/Catelogue';
 import ErrorPage from '../page/Error/Error';
 import Admin from '../page/Admin/Admin';
 import EditProduct from '../page/Admin/components/EditProdct/EditProduct';
+import Shop from '../page/Shop/Shop';
+import Purchase from '../page/Purchase/Purchase';
+import Profile from '../page/Profile/Profile';
+import AdminProduct from '../page/Admin/Page/AdminProduct/AdminProduct';
+import AdminOrder from '../page/Admin/Page/AdminOrder/AdminOrder';
+import AddProduct from '../page/Admin/components/AddProduct/AddProduct';
 function AppRouter(props) {
     return (
         <Router>
@@ -19,14 +25,24 @@ function AppRouter(props) {
                 <Route path='/'>
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
-                    <Route path='/admin' element={<LayoutContainer
+                    <Route path='/admin/product' element={<LayoutContainer
                         isAdmin={true}
                         showFooter={false}
                         showHeader={false}
                         isPrivate={true}
-                    ><Admin /></LayoutContainer>} />
-                    <Route path='/home' element={<LayoutContainer><Home /></LayoutContainer>} />
+                    ><AdminProduct /></LayoutContainer>} />
+                    <Route path='/admin/order' element={<LayoutContainer
+                        isAdmin={true}
+                        showFooter={false}
+                        showHeader={false}
+                        isPrivate={true}
+                    ><AdminOrder /></LayoutContainer>} />
+                    <Route path='/' element={<LayoutContainer><Home /></LayoutContainer>} />
+                    <Route path='/shop' element={<LayoutContainer><Shop /></LayoutContainer>} />
+                    <Route path='/profile' element={<LayoutContainer><Profile /></LayoutContainer>} />
+                    <Route path='/purchase' element={<LayoutContainer><Purchase /></LayoutContainer>} />
                     <Route path='/editproduct/:productId' element={<EditProduct />} />
+                    <Route path='/addproduct' element={<AddProduct />} />
                     <Route path='/category' element={<LayoutContainer><Category /></LayoutContainer>} />
                     <Route path='/product/:productId' element={<LayoutContainer><Product /></LayoutContainer>} />
                     <Route path='/search' element={<LayoutContainer><Catelogue /></LayoutContainer>} />

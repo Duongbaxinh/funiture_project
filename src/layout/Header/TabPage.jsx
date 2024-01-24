@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const tabPage = [
     {
         nameTab: 'Home',
-        endPoint: '/home'
+        endPoint: '/'
     },
     {
         nameTab: 'Shop',

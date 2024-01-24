@@ -4,6 +4,9 @@
 .admin {
   display: flex;
 }
+.itemselected {
+  background-color: $darkGrey !important;
+}
 .slideBar {
   width: 350px;
   height: 100vh;

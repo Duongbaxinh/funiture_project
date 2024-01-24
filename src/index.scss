@@ -13,7 +13,9 @@ body {
   box-sizing: border-box;
   font-family: "Roboto", "sans-serif";
 }
-
+input {
+  outline-color: gray;
+}
 a {
   text-decoration: none;
   color: black;
@@ -33,15 +35,15 @@ span {
 }
 h1 {
   font-size: 22px;
-  font-weight: normal;
+  font-weight: 700;
 }
 h2 {
   font-size: 18px;
-  font-weight: normal;
+  font-weight: bolder;
 }
 h3 {
   font-size: 14px;
-  font-weight: normal;
+  font-weight: bold;
 }
 h4 {
   font-size: 12px;

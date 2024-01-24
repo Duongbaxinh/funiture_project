@@ -1,0 +1,25 @@
+@import "../../../assets/scss/mixin/index.scss";
+@import "../../../assets/scss/variable/colors.scss";
+.pagination {
+  display: flex;
+  place-content: center;
+  padding: 15px;
+
+  gap: 8px;
+  & li > button {
+    @include buttonCustome;
+  }
+}
+.item {
+  padding: 0 8px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  place-content: center;
+  align-items: center;
+}
+.selected {
+  color: $white;
+  border-radius: 50%;
+  background-color: $darkGrey;
+}

@@ -15,6 +15,7 @@ function ShoppingCart({ products, onHandleQuatity, onRemoveProduct }) {
             {/* PRODUCT */}
             {products.map(({
                 productId,
+                cartId,
                 product_name,
                 product_des,
                 product_thumbnail,
@@ -33,7 +34,7 @@ function ShoppingCart({ products, onHandleQuatity, onRemoveProduct }) {
                                 <p>Type:{product_type}</p>
                                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
                                     <SvgIconCancel
-                                        onClick={() => onRemoveProduct(productId)} />
+                                        onClick={() => onRemoveProduct(productId, cartId)} />
                                     Remove
                                 </div>
                             </div>

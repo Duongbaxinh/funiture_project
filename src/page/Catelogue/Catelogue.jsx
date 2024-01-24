@@ -30,20 +30,16 @@ function Catelogue(props) {
                                 <Link to={`/product/${product.id}`}>
                                     <div className={`item${index} content`}>
                                         <div className={`itemt${index}`}>
-                                            <div>
-                                                <div className="images">
-                                                    <img src={product.product_thumbnail} alt='' />
-                                                </div>
-                                                <div className='Details'>
-                                                    <IconStartA />
-                                                    <IconStartA />
-                                                    <IconStartA />
-                                                    <IconStartA />
-                                                    <IconStartA />
-                                                    <h2>{product.product_name}</h2>
-                                                    <h4>${product.product_price}</h4>
-                                                </div>
+
+                                            <div className="images">
+                                                <img src={product.product_thumbnail} alt='' />
                                             </div>
+                                            <div className='details'>
+                                                <h2>{product.product_name}</h2>
+                                                <p className='details_des'>{product.product_des}</p>
+                                                <h4>${product.product_price}</h4>
+                                            </div>
+
                                         </div>
                                         <div className="item_over">
                                             <Link to={`/product/${product.id}`}>
